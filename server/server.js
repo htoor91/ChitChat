@@ -4,8 +4,11 @@ const api = require('./api/api');
 const config = require('./config/config');
 const logger = require('./util/logger');
 const auth = require('./auth/routes');
+const mongoose = require('mongoose');
 // connect to DB
-require('mongoose').connect(config.db.url);
+
+mongoose.Promise = require('bluebird');
+mongoose.connect(config.db.url);
 
 if (config.seed) {
   require('./util/seed');
