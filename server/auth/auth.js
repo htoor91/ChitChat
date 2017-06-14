@@ -41,7 +41,7 @@ exports.getFreshUser = function() {
       }, function(err) {
         next(err);
       });
-  }
+  };
 };
 
 exports.verifyUser = function() {
