@@ -5,6 +5,7 @@ const config = require('./config/config');
 const logger = require('./util/logger');
 const auth = require('./auth/routes');
 const mongoose = require('mongoose');
+const path = require('path');
 // connect to DB
 
 mongoose.Promise = require('bluebird');
@@ -13,12 +14,17 @@ mongoose.connect(config.db.url);
 if (config.seed) {
   require('./util/seed');
 }
+
+// Make static files publically available
+app.use(express.static(path.join(__dirname, '..', 'client', 'src', 'public')));
+
 // setup the app middleware
 require('./middleware/appMiddleware')(app);
 
-// setup the api
+// mount the routers
 app.use('/api', api);
 app.use('/auth', auth);
+
 
 // set up global error handling
 app.use(function(err, req, res, next) {
