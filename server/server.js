@@ -19,7 +19,7 @@ if (config.seed) {
 app.use(express.static(path.join(__dirname, '..', 'client', 'src', 'public')));
 
 // setup the app middleware
-require('./middleware/appMiddleware')(app);
+require('./middleware/app_middleware')(app);
 
 // mount the routers
 app.use('/api', api);

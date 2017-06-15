@@ -1,4 +1,4 @@
-const User = require('./userModel');
+const User = require('./user_model');
 const _ = require('lodash');
 const signToken = require('../../auth/auth').signToken;
 
