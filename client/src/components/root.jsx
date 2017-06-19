@@ -1,8 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router, Route, Switch } from 'react-router';
+import { Router, Route } from 'react-router';
 import { HashRouter } from 'react-router-dom';
-import { splashRender, homeRender } from '../util/route_util';
+import { splashRender, homeRender, authRender } from '../util/route_util';
 
 const Root = ({ store }) => {
   return (
@@ -10,6 +10,8 @@ const Root = ({ store }) => {
       <HashRouter>
         <div>
           <Route exact path="/" render={ splashRender }/>
+          <Route path="/signup" component={ authRender }/>
+          <Route path="/login" component={ authRender }/>
           <Route path="/home" render={ homeRender }/>
         </div>
       </HashRouter>
