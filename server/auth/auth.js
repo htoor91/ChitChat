@@ -51,7 +51,7 @@ exports.verifyUser = function() {
 
     // if no username or password then send
     if (!username || !password) {
-      res.status(400).send('You need a username and password');
+      res.status(400).send('Invalid credentials');
       return;
     }
 
@@ -60,11 +60,11 @@ exports.verifyUser = function() {
     User.findOne({username: username})
       .then(function(user) {
         if (!user) {
-          res.status(401).send('No user with the given username');
+          res.status(401).send('Invalid credentials');
         } else {
           // checking the passowords here
           if (!user.authenticate(password)) {
-            res.status(401).send('Wrong password');
+            res.status(401).send('Invalid credentials');
           } else {
             // if everything is good,
             // then attach to req.user
