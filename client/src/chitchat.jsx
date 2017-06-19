@@ -8,12 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
   var store;
   const currentUser = localStorage.getItem('currentUser');
   const main = document.getElementById("main");
-  
+
   if (currentUser) {
     const preloadedState = { auth: { currentUser: currentUser } };
     store = configureStore(preloadedState);
   } else {
     store = configureStore();
   }
+  window.store = store;
   ReactDOM.render(<Root store={ store } />, main);
 });
