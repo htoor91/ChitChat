@@ -39,6 +39,10 @@ module.exports = {
         query: {
           presets: ['es2015', 'react']
         }
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        loader: "url-loader?limit=5000&name=img/img-[hash:6].[ext]"
       }
     ]
   },
