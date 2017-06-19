@@ -33,6 +33,9 @@ app.use(function(err, req, res, next) {
     res.status(401).send('Invalid token');
     return;
   }
+  if (err.code === 11000){
+    res.status(400).send('Username already exists!');
+  }
 
   logger.error(err.stack);
   res.status(500).send('Oops');
