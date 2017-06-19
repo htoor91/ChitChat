@@ -12,7 +12,7 @@ export function login(user) {
         localStorage.setItem('currentUser', res.user);
         return dispatch(receiveCurrentUser(res.user));
       },
-      (errors) => dispatch(receiveErrors(errors.responseJSON))
+      (errors) => dispatch(receiveErrors([errors.responseText]))
     );
   };
 }
@@ -29,9 +29,10 @@ export function signup(user) {
     return Auth.signup(user).then(
       (res) => {
         localStorage.setItem('jwt', res.token);
+        localStorage.setItem('currentUser', res.user);
         return dispatch(receiveCurrentUser(res.user));
       },
-      (errors) => dispatch(receiveErrors(errors.responseJSON))
+      (errors) => dispatch(receiveErrors([errors.responseText]))
     );
   };
 }
