@@ -29,7 +29,6 @@ const ChannelUtil = {
     });
   }
 
-
 };
 
 export default ChannelUtil;
