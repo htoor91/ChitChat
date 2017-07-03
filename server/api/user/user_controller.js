@@ -33,7 +33,7 @@ exports.get = function(req, res, next) {
 
 exports.getOne = function(req, res, next) {
   const user = req.user.toJson();
-  res.json(user.toJson());
+  res.json(user);
 };
 
 exports.put = function(req, res, next) {
