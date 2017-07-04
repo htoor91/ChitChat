@@ -1,4 +1,6 @@
 const User = require('./user_model');
+const Membership = require('../membership/membership_model');
+const Channel = require('../channel/channel_model');
 const _ = require('lodash');
 const signToken = require('../../auth/auth').signToken;
 
@@ -36,6 +38,11 @@ exports.getOne = function(req, res, next) {
   res.json(user);
 };
 
+exports.getChannels = function(req, res, next){
+  const user = req.user.toJson();
+  // TODO: Populate users channels and send JSON response
+};
+
 exports.put = function(req, res, next) {
   const user = req.user;
 
@@ -57,6 +64,18 @@ exports.post = function(req, res, next) {
 
   newUser.save(function(err, user) {
     if(err) { return next(err);}
+
+    Channel.find({ private: false })
+      .then(function(channels) {
+        channels.forEach(function(channel){
+          Membership.create({userId: user._id, channelId: channel._id})
+            .then(function(membership){}, function(membershipErr){
+              next(membershipErr);
+            });
+        });
+      }, function(channelErr){
+        next(channelErr);
+      });
 
     const token = signToken(user._id);
     res.json({token: token, user: user.username});
