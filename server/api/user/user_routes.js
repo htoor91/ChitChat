@@ -18,4 +18,7 @@ router.route('/:id')
   .put(checkUser, controller.put)
   .delete(checkUser, controller.delete);
 
+router.route('/:id/channels')
+  .get(controller.getChannels);
+
 module.exports = router;
