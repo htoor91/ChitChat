@@ -13,6 +13,9 @@ router.route('/:id')
   .get(controller.getOne)
   .delete(controller.delete);
 
+router.route('/:id/messages')
+  .get(controller.getMessages);
+
 module.exports = router;
 
 

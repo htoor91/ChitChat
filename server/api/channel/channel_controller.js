@@ -1,5 +1,6 @@
 const Channel = require('./channel_model');
 const Membership = require('../membership/membership_model');
+const Message = require('../message/message_model');
 
 exports.params = function(req, res, next, id){
   Channel.findById(id)
@@ -26,6 +27,24 @@ exports.get = function(req, res, next){
 
 exports.getOne = function(req, res, next){
   res.json(req.channel);
+};
+
+exports.getMessages = function(req, res, next){
+  const channelId = req.channel._id;
+  let messages = {};
+
+  Message.find({channelId: channelId})
+    .populate('userId', '_id username')
+    .exec()
+    .then(function(messageArr){
+      messageArr.forEach(function(msg, idx){
+        messages[idx] = msg;
+      });
+
+      res.json(messages);
+    }, function(err){
+      next(err);
+    });
 };
 
 exports.post = function(req, res, next){
