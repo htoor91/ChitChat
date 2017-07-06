@@ -40,7 +40,26 @@ exports.getOne = function(req, res, next) {
 
 exports.getChannels = function(req, res, next){
   const user = req.user.toJson();
-  // TODO: Populate users channels and send JSON response
+
+  Membership.find({userId: user._id})
+    .populate('channelId', 'name')
+    .exec(function(err, memberships){
+      if(err){
+        next(err);
+      }
+      console.log(memberships);
+      res.json(memberships);
+    });
+
+  // Membership.find({userId: user._id})
+  //   .populate('channelId', 'name')
+  //   .exec()
+  //   .then(function(memberships){
+  //     console.log(memberships);
+  //     res.json(memberships);
+  //   }, function(err){
+  //     next(err);
+  //   });
 };
 
 exports.put = function(req, res, next) {
