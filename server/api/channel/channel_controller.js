@@ -49,11 +49,18 @@ exports.post = function(req, res, next){
 };
 
 exports.delete = function(req, res, next) {
+  const channelId = req.channel._id;
+
   req.channel.remove(function(err, removed){
     if(err){
       next(err);
     } else{
-      res.json(removed);
+      Membership.remove({channelId: channelId}, function(queryErr){
+        if(queryErr){
+          next(queryErr);
+        }
+        res.json(removed);
+      });
     }
   });
 };
