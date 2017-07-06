@@ -1,6 +1,6 @@
 const User = require('./user_model');
-const Membership = require('../membership/membership_model');
 const Channel = require('../channel/channel_model');
+const Membership = require('../membership/membership_model');
 const _ = require('lodash');
 const signToken = require('../../auth/auth').signToken;
 
@@ -40,26 +40,20 @@ exports.getOne = function(req, res, next) {
 
 exports.getChannels = function(req, res, next){
   const user = req.user.toJson();
+  let channels = {};
 
   Membership.find({userId: user._id})
-    .populate('channelId', 'name')
-    .exec(function(err, memberships){
-      if(err){
-        next(err);
-      }
-      console.log(memberships);
-      res.json(memberships);
+    .populate('channelId')
+    .exec()
+    .then(function(memberships){
+      memberships.forEach(function(el, idx){
+        channels[idx] = el.channelId;
+      });
+      res.json(channels);
+    }, function(err){
+      next(err);
     });
 
-  // Membership.find({userId: user._id})
-  //   .populate('channelId', 'name')
-  //   .exec()
-  //   .then(function(memberships){
-  //     console.log(memberships);
-  //     res.json(memberships);
-  //   }, function(err){
-  //     next(err);
-  //   });
 };
 
 exports.put = function(req, res, next) {
