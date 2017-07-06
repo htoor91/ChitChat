@@ -4,13 +4,13 @@ const Schema = mongoose.Schema;
 const MembershipSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'user',
     required: true,
     index: true
   },
   channelId: {
     type: Schema.Types.ObjectId,
-    ref: 'Channel',
+    ref: 'channel',
     required: true,
     index: true
   }
