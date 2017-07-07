@@ -1,9 +1,10 @@
-// intro point for our server.
-
-// setup config first before anything by requiring it
 const config = require('./server/config/config');
 const app = require('./server/server');
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 const logger = require('./server/util/logger');
+const socketEvents = require('./server/socket_events');
 
-app.listen(config.port);
+server.listen(config.port);
 logger.log('listening on http://localhost:' + config.port);
+socketEvents(io);
