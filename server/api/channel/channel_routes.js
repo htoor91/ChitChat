@@ -16,6 +16,9 @@ router.route('/:id')
 router.route('/:id/messages')
   .get(controller.getMessages);
 
+router.route('/:id/users')
+  .get(controller.getUsers);
+
 module.exports = router;
 
 

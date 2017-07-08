@@ -27,6 +27,24 @@ exports.get = function(req, res, next){
 
 exports.getOne = function(req, res, next){
   res.json(req.channel);
+
+};
+
+exports.getUsers = function(req, res, next){
+  const channelId = req.channel._id;
+  let users = [];
+
+  Membership.find({channelId: channelId})
+    .populate('userId', '_id username')
+    .exec()
+    .then(function(memberships){
+      memberships.forEach(function(membership){
+        users.push(membership.userId);
+      });
+      res.json(users);
+    }, function(err){
+      next(err);
+    });
 };
 
 exports.getMessages = function(req, res, next){
