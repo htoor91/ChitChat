@@ -15,17 +15,17 @@ const ChannelUtil = {
     });
   },
 
-  deleteChannel(id){
+  deleteChannel(channelId){
     return $.ajax({
       method: 'DELETE',
-      url: `/api/channels/${id}`
+      url: `/api/channels/${channelId}`
     });
   },
 
-  fetchChannelUserCount(channelId){
+  fetchChannelUsers(channelId){
     return $.ajax({
       method: 'GET',
-      url: `/api/channels/${channelId}`
+      url: `/api/channels/${channelId}/users`
     });
   }
 
