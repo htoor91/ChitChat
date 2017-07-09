@@ -3,7 +3,7 @@ const ChannelUtil = {
   createChannel(channel){
     return $.ajax({
       method: "POST",
-      url: "/api/users",
+      url: "/api/channels",
       data: {channel}
     });
   },
