@@ -37,7 +37,7 @@ export function fetchUserChannels(userId){
 export function fetchChannelUsers(channelId){
   return (dispatch) => {
     return Channel.fetchChannelUsers(channelId).then(
-      (channelUsers) => dispatch(receiveChannelUsers(channelUsers)),
+      (channelUsers) => dispatch(receiveChannelUsers(channelUsers, channelId)),
       (err) => dispatch(receiveErrors(err))
     );
   };
@@ -65,10 +65,11 @@ export const receiveUserChannels = (userChannels) => {
   };
 };
 
-export const receiveChannelUsers = (channelUsers) => {
+export const receiveChannelUsers = (channelUsers, channelId) => {
   return {
     type: RECEIVE_CHANNEL_USERS,
-    channelUsers
+    channelUsers,
+    channelId
   };
 };
 
