@@ -42,4 +42,4 @@ const ChannelReducer = (state = initState, action) => {
   }
 };
 
-export default AuthReducer;
+export default ChannelReducer;
