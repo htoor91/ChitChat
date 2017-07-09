@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-// import users from 'user_reducer';
 import auth from './auth_reducer';
+import channels from './channel_reducer';
 
-export default combineReducers( {auth} );
+export default combineReducers( {auth, channels} );
