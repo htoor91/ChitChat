@@ -7,5 +7,5 @@ exports.signin = function(req, res, next) {
   // and send it back for the client to consume
   const token = signToken(req.user._id);
   const username = req.user.username;
-  res.json({token: token, user: req.user.toJson(), username: username});
+  res.json({token: token, user: req.user.toJson()});
 };
