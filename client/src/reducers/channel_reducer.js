@@ -1,5 +1,5 @@
 import {
-  RECEIVE_CHANNEL,
+  ADD_CHANNEL,
   RECEIVE_USER_CHANNELS,
   REMOVE_CHANNEL,
   RECEIVE_CHANNEL_USERS,
@@ -18,7 +18,7 @@ const ChannelReducer = (state = initState, action) => {
 	Object.freeze(state);
 
   switch(action.type) {
-    case RECEIVE_CHANNEL:
+    case ADD_CHANNEL:
       const newChannel = action.channel;
       nextState.channels[newChannel._id] = newChannel;
       return nextState;
