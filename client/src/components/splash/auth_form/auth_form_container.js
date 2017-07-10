@@ -20,4 +20,6 @@ const mapDispatchToProps = (dispatch, { location }) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(AuthForm)
+);
