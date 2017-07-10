@@ -1,7 +1,7 @@
 import {
   ADD_CHANNEL,
-  RECEIVE_USER_CHANNELS,
   REMOVE_CHANNEL,
+  RECEIVE_USER_CHANNELS,
   RECEIVE_CHANNEL_USERS,
   RECEIVE_ERRORS,
   CLEAR_ERRORS
@@ -9,7 +9,7 @@ import {
 import merge from 'lodash/merge';
 
 const initState = {
-  channels: null,
+  channels: {},
   errors: []
 };
 
@@ -22,11 +22,11 @@ const ChannelReducer = (state = initState, action) => {
       const newChannel = action.channel;
       nextState.channels[newChannel._id] = newChannel;
       return nextState;
-    case RECEIVE_USER_CHANNELS:
-      nextState.channels = action.userChannels;
-      return nextState;
     case REMOVE_CHANNEL:
       delete nextState.channels[action.removedChannel._id];
+      return nextState;
+    case RECEIVE_USER_CHANNELS:
+      nextState.channels = action.userChannels;
       return nextState;
     case RECEIVE_CHANNEL_USERS:
       nextState.channels[action.channelId].users = action.channelUsers;
