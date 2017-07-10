@@ -91,7 +91,8 @@ exports.post = function(req, res, next) {
       });
 
     const token = signToken(user._id);
-    res.json({token: token, user: user._id});
+    const username = user.username;
+    res.json({token: token, user: user.toJson(), username: username});
   });
 };
 
