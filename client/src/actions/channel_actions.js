@@ -1,8 +1,8 @@
 import Channel from '../util/channel_util';
 
-export const RECEIVE_CHANNEL = 'RECEIVE_CHANNEL';
-export const RECEIVE_USER_CHANNELS = 'RECEIVE_USER_CHANNELS';
+export const ADD_CHANNEL = 'ADD_CHANNEL';
 export const REMOVE_CHANNEL = 'REMOVE_CHANNEL';
+export const RECEIVE_USER_CHANNELS = 'RECEIVE_USER_CHANNELS';
 export const RECEIVE_CHANNEL_USERS = 'RECEIVE_CHANNEL_USERS';
 export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
@@ -10,7 +10,7 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export function createChannel(channel) {
   return (dispatch) => {
     return Channel.createChannel(channel).then(
-      (createdChannel) => dispatch(receiveChannel(createdChannel)),
+      (createdChannel) => dispatch(addChannel(createdChannel)),
       (err) => dispatch(receiveErrors(err))
     );
   };
@@ -43,9 +43,9 @@ export function fetchChannelUsers(channelId){
   };
 }
 
-export const receiveChannel = (channel) => {
+export const addChannel = (channel) => {
   return {
-    type: RECEIVE_CHANNEL,
+    type: ADD_CHANNEL,
     channel
   };
 };
