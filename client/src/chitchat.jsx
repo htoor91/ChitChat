@@ -6,7 +6,7 @@ import configureStore from './store/store';
 
 document.addEventListener("DOMContentLoaded", () => {
   var store;
-  const currentUser = localStorage.getItem('currentUser');
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const main = document.getElementById("main");
 
   if (currentUser) {
