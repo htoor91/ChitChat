@@ -46,8 +46,8 @@ exports.getChannels = function(req, res, next){
     .populate('channelId')
     .exec()
     .then(function(memberships){
-      memberships.forEach(function(el, idx){
-        channels[idx] = el.channelId;
+      memberships.forEach(function(el){
+        channels[el.channelId._id] = el.channelId;
       });
       res.json(channels);
     }, function(err){
