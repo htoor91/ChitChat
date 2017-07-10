@@ -22,10 +22,11 @@ const MessageUtil = {
     });
   },
 
-  updateMessage(messageId){
+  updateMessage(message){
     return $.ajax({
       method: 'PUT',
-      url: `/api/messages/${messageId}`
+      url: `/api/messages/${message._id}`,
+      data: { message }
     });
   }
 
