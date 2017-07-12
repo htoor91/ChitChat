@@ -1,5 +1,5 @@
 import React from 'react';
-import ChannelListItem from '../list_item/list_item';
+import ChannelListItem from './list_item';
 
 class ChannelList extends React.Component {
   constructor(props){
