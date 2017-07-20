@@ -1,12 +1,17 @@
 import { connect } from 'react-redux';
 import Sidebar from './sidebar';
 import { fetchUserChannels } from '../../../actions/channel_actions';
-
 import { logout } from '../../../actions/auth_actions';
+import { withRouter } from 'react-router';
+import { selectChannels } from '../../../reducers/selectors';
 
-const mapStateToProps = (state) => {
+
+
+const mapStateToProps = (state, { match }) => {
   return({
-    user: state.auth.currentUser
+    user: state.auth.currentUser,
+    messageId: match.params.messageId,
+    firstChannel: selectChannels(state, false)[0]
   });
 };
 
@@ -17,4 +22,6 @@ const mapDispatchToProps = (dispatch) => {
   });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Sidebar)
+);
