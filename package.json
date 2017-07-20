@@ -48,7 +48,7 @@
     "react-html5video": "^2.1.0",
     "react-icons": "^2.2.5",
     "react-md-spinner": "^0.2.4",
-    "react-modal": "^1.9.4",
+    "react-modal": "^1.9.7",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
