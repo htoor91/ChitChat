@@ -71,14 +71,15 @@ exports.post = function(req, res, next){
 
   Channel.create(newChannel)
     .then(function(channel){
-      const channelId = channel._id;
-      userIds.forEach(function(userId){
-        Membership.create({ userId: userId, channelId: channelId})
+      if(userIds){
+        const channelId = channel._id;
+        userIds.forEach(function(userId){
+          Membership.create({ userId: userId, channelId: channelId})
           .then(function(){}, function(err){
             next(err);
           });
-      });
-
+        });
+      }
       res.json(channel);
     }, function(err){
       next(err);
