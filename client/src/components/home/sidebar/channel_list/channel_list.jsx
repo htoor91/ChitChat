@@ -59,12 +59,12 @@ class ChannelList extends React.Component {
     );
 
     return (
-      <div className="all-channels">
+      <div className="channel-list-container">
         <h2 className="public-channels-header">Channels
           <span> ({publicListItems.length})</span>
-          <button
-            onClick={this.openChannelModal}
-            className="creation-button" />
+          <i onClick={this.openChannelModal}
+            className="fa fa-plus-square"
+            aria-hidden="true"></i>
         </h2>
         <ul className="public-channels-list">
           { publicListItems }
@@ -72,9 +72,9 @@ class ChannelList extends React.Component {
 
         <h2 className="private-channels-header">Direct Messages
           <span> ({privateListItems.length})</span>
-          <button
-            onClick={this.openMessageModal}
-            className="creation-button" />
+          <i onClick={this.openMessageModal} 
+            className="fa fa-plus-square"
+            aria-hidden="true"></i>
         </h2>
         <ul className="private-channels-list">
           { privateListItems }
