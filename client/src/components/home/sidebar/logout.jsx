@@ -33,7 +33,7 @@ const Logout = ({ logout, user }) => {
                 <p id="logout-box-handle">@{user.username}</p>
               </div>
             </div>
-            <span id="logout-box-logout-btn" onClick={logoutHandler}>Logout</span>
+            <button id="logout-box-logout-btn" onClick={logoutHandler}>Logout</button>
           </div>
         </li>
       </ul>
