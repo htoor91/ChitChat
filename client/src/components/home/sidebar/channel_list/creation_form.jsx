@@ -76,6 +76,7 @@ class CreationForm extends React.Component {
       if(this.state.private){
         let usernames = this.state.selectedUsers
         .map((user) => user.username)
+        .filter((user) => user !== this.props.user.username)
         .join(', ');
 
         if(usernames.length > 30){
