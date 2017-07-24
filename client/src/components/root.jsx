@@ -12,7 +12,7 @@ const Root = ({ store }) => {
           <Route exact path="/" render={ splashRender }/>
           <Route path="/signup" component={ authRender }/>
           <Route path="/login" component={ authRender }/>
-          <Route path="/home" render={ homeRender }/>
+          <Route path="/messages/:messageId" render={ homeRender }/>
         </div>
       </HashRouter>
     </Provider>

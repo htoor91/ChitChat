@@ -6,7 +6,7 @@ import AuthFormContainer from '../components/splash/auth_form/auth_form_containe
 
 export const splashRender = () => {
   const loggedIn = localStorage.getItem('jwt');
-  return loggedIn ? <Redirect to="/home"/> : <SplashContainer />;
+  return loggedIn ? <Redirect to="/messages/:messageId"/> : <SplashContainer />;
 };
 
 export const homeRender = () => {
@@ -16,5 +16,5 @@ export const homeRender = () => {
 
 export const authRender = ({match}) => {
   const loggedIn = localStorage.getItem('jwt');
-  return loggedIn ? <Redirect to="/home"/> : <AuthFormContainer />;
+  return loggedIn ? <Redirect to="/messages/:messageId"/> : <AuthFormContainer />;
 };
