@@ -8,7 +8,7 @@ const Root = ({ store }) => {
   return (
     <Provider store={ store }>
       <HashRouter>
-        <div>
+        <div id="parent-container">
           <Route exact path="/" render={ splashRender }/>
           <Route path="/signup" component={ authRender }/>
           <Route path="/login" component={ authRender }/>
