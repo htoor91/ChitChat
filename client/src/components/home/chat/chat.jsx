@@ -5,6 +5,7 @@ import ChatHeader from './chat_header_container';
 const Chat = () => {
   return (
     <section id="chat-view-container">
+      <ChatHeader />
     </section>
   );
 };
