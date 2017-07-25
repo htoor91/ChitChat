@@ -4,7 +4,7 @@ const MessageUtil = {
     return $.ajax({
       method: "POST",
       url: "/api/messages",
-      data: {message}
+      data: message
     });
   },
 
@@ -26,7 +26,7 @@ const MessageUtil = {
     return $.ajax({
       method: 'PUT',
       url: `/api/messages/${message._id}`,
-      data: { message }
+      data: message
     });
   }
 
