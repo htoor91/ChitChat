@@ -29,9 +29,18 @@ exports.getOne = function(req, res, next){
 };
 
 exports.post = function(req, res, next){
+  const user = req.body.user;
+
   Message.create(req.body)
     .then(function(message){
-      res.json(message);
+      Message.findOne(message)
+        .populate('userId', '_id username')
+        .exec()
+        .then(function(populatedMessage){
+          res.json(populatedMessage);
+        }, function(err){
+          next(err);
+        });
     }, function(err){
       next(err);
     });
