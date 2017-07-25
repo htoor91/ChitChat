@@ -68,11 +68,16 @@ body {
   display: flex;
 }
 
+#main {
+	width: 100%;
+}
+
 .home-container {
   height: 100vh;
   display: flex;
-  flex-direction: column;
 }
+
+
 
 /* SIDEBAR */
 
@@ -155,6 +160,14 @@ h2 {
 
 }
 
+.private-channels-list li {
+
+}
+
+.list-item {
+	padding-right: 15px;
+}
+
 /* SIDEBAR FOOTER */
 
 .sidebar-footer {
@@ -169,4 +182,10 @@ h2 {
 
 .sidebar-footer li {
   margin-top: 15px;
+}
+
+/* CHAT VIEW */
+
+#chat-view-container {
+	width: 100%;
 }
