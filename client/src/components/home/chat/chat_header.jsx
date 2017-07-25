@@ -7,6 +7,12 @@ class ChatHeader extends React.Component {
     this.toggleDetailView = this.toggleDetailView.bind(this);
   }
 
+  componentDidMount(){
+    if(this.props.channelId !== ':messageId'){
+      this.props.fetchChannelUsers(this.props.channelId);
+    }
+  }
+
   shouldComponentUpdate(newProps){
     if(this.props.channel && !newProps.channel.users){
       this.props.fetchChannelUsers(newProps.channelId);
