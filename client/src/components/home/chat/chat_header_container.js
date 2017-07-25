@@ -10,7 +10,6 @@ const mapStateToProps = (state, { match }) => {
   return {
     user: state.auth.currentUser,
     channel: state.channels.channels[channelId],
-    messages: state.messages.messages,
     channelId: channelId
   };
 };
