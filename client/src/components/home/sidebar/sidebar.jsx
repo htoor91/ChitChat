@@ -15,12 +15,11 @@ class Sidebar extends React.Component {
   componentWillReceiveProps(newProps){
     if (this.props.messageId === ':messageId' &&
       newProps.firstChannel !== undefined) {
-      newProps.history.push(`/messages/${newProps.firstChannel._id}/details`);
+        newProps.history.push(`/messages/${newProps.firstChannel._id}/details`);
     }
   }
 
   render(){
-    const username = this.props.user.username;
     return(
       <div className="sidebar-container">
         <div className="sidebar-header">
@@ -28,7 +27,7 @@ class Sidebar extends React.Component {
           <Logout logout={this.props.logout} user={this.props.user}/>
           <i id='fa-online-status' className='fa fa-circle' aria-hidden='true'>
           </i>
-          <h2>{username}</h2>
+          <h2>{this.props.user.username}</h2>
         </div>
         <ChannelList />
         <Footer />
