@@ -55,8 +55,8 @@ exports.getMessages = function(req, res, next){
     .populate('userId', '_id username')
     .exec()
     .then(function(messageArr){
-      messageArr.forEach(function(msg, idx){
-        messages[idx] = msg;
+      messageArr.forEach(function(msg){
+        messages[msg._id] = msg;
       });
 
       res.json(messages);
