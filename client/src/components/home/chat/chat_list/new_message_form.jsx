@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 
-
 class NewMessageForm extends React.Component {
   constructor(props){
     super(props);
@@ -21,7 +20,12 @@ class NewMessageForm extends React.Component {
   createMessage(){
     const msg = this.state;
     this.state.channelId = this.props.match.params.channelId;
-    this.props.createMessage(msg).then(this.props.scrollToBottom);
+    this.props.createMessage(msg).then((createdMsg) => {
+      this.props.scrollToBottom();
+      this.props.socket.emit('broadcast message',
+      { message: createdMsg, channel: this.state.channelId });
+    });
+
     this.clearState();
   }
 
