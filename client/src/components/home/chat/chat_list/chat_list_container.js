@@ -5,7 +5,8 @@ import {
   fetchChannelMessages,
   createMessage,
   deleteMessage,
-  updateMessage } from '../../../../actions/message_actions';
+  updateMessage,
+  addMessage } from '../../../../actions/message_actions';
 // import { deleteNotifications, createNotification } from '../../../../../frontend/actions/session_actions';
 
 // TODO refactor messages into a selector function.
@@ -24,7 +25,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchChannelMessages: (channelId) => dispatch(fetchChannelMessages(channelId)),
     createMessage: (message) => dispatch(createMessage(message)),
     deleteMessage: (messageId) => dispatch(deleteMessage(messageId)),
-    updateMessage: (message) => dispatch(updateMessage(message))
+    updateMessage: (message) => dispatch(updateMessage(message)),
+    addMessage: (message) => dispatch(addMessage(message))
   };
 };
 
