@@ -1,19 +1,29 @@
 import React from 'react';
 import ChatListItem from './chat_list_item';
 import NewMessageForm from './new_message_form';
+import io from 'socket.io-client';
+const socket = io();
+
 
 
 class ChatList extends React.Component {
   constructor(props){
     super(props);
 
+    socket.on('receive message', (payload) => {
+      this.props.addMessage(payload.message.message);
+    });
+
     this.scrollToBottom = this.scrollToBottom.bind(this);
   }
 
   componentWillReceiveProps(newProps){
     if(!this.props.channel && newProps.channel){
+      socket.emit('join channel', {channel: newProps.channelId});
       this.props.fetchChannelMessages(newProps.channelId);
     } else if(this.props.channelId !== newProps.channelId){
+      socket.emit('leave channel', {channel: this.props.channelId});
+      socket.emit('join channel', {channel: newProps.channelId});
       newProps.fetchChannelMessages(newProps.channelId).then(this.scrollToBottom);
     }
   }
@@ -52,7 +62,8 @@ class ChatList extends React.Component {
             currentUser={this.props.currentUser}
             scrollToBottom={this.scrollToBottom}
             userId={this.props.currentUser._id}
-            channelId={this.props.channel._id} />
+            channelId={this.props.channel._id}
+            socket={socket} />
         </footer>
         {this.scrollToBottom()}
       </section>
