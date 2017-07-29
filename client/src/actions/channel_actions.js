@@ -6,6 +6,8 @@ export const RECEIVE_USER_CHANNELS = 'RECEIVE_USER_CHANNELS';
 export const RECEIVE_CHANNEL_USERS = 'RECEIVE_CHANNEL_USERS';
 export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
+export const CLEAR_NOTIFICATIONS = 'CLEAR_NOTIFICATIONS';
 
 export function createChannel(channel) {
   return (dispatch) => {
@@ -83,5 +85,19 @@ export const receiveErrors = (errors) => {
 export const clearErrors = () => {
   return {
     type: CLEAR_ERRORS
+  };
+};
+
+export const addNotification = (channelId) => {
+  return {
+    type: ADD_NOTIFICATION,
+    channelId
+  };
+};
+
+export const clearNotifications = (channelId) => {
+  return {
+    type: CLEAR_NOTIFICATIONS,
+    channelId
   };
 };
