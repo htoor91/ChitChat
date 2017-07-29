@@ -10,8 +10,16 @@ class ChatList extends React.Component {
   constructor(props){
     super(props);
 
+    const self = this;
+
     socket.on('receive message', (payload) => {
-      this.props.addMessage(payload.message.message);
+      self.props.addMessage(payload.message.message);
+    });
+
+    socket.on('receive notification', (channelId) => {
+      if(self.props.channelId !== channelId){
+        self.props.addNotification(channelId);
+      }
     });
 
     this.scrollToBottom = this.scrollToBottom.bind(this);
@@ -25,6 +33,7 @@ class ChatList extends React.Component {
       socket.emit('leave channel', {channel: this.props.channelId});
       socket.emit('join channel', {channel: newProps.channelId});
       newProps.fetchChannelMessages(newProps.channelId).then(this.scrollToBottom);
+      newProps.clearNotifications(newProps.channelId);
     }
   }
 
