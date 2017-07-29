@@ -2,12 +2,14 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import ChatList from './chat_list';
 import {
+  addNotification,
+  clearNotifications } from '../../../../actions/channel_actions';
+import {
   fetchChannelMessages,
   createMessage,
   deleteMessage,
   updateMessage,
   addMessage } from '../../../../actions/message_actions';
-// import { deleteNotifications, createNotification } from '../../../../../frontend/actions/session_actions';
 
 // TODO refactor messages into a selector function.
 
@@ -26,7 +28,9 @@ const mapDispatchToProps = (dispatch) => {
     createMessage: (message) => dispatch(createMessage(message)),
     deleteMessage: (messageId) => dispatch(deleteMessage(messageId)),
     updateMessage: (message) => dispatch(updateMessage(message)),
-    addMessage: (message) => dispatch(addMessage(message))
+    addMessage: (message) => dispatch(addMessage(message)),
+    addNotification: (channelId) => dispatch(addNotification(channelId)),
+    clearNotifications: (channelId) => dispatch(clearNotifications(channelId))
   };
 };
 
