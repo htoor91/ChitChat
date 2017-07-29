@@ -19,6 +19,12 @@ module.exports = function(io){
     socket.on('broadcast message', function(data){
       console.log("BROADCASTING MESSAGE FROM: " + data.channel);
       socket.broadcast.to(data.channel).emit('receive message', data);
+      socket.broadcast.emit('receive notification', data.channel);
     });
+
+    socket.on('broadcast created channel', function(data){
+      socket.broadcast.emit('receive channel', data.channel);
+    });
+
   });
 };
