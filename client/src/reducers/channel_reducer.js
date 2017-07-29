@@ -4,7 +4,9 @@ import {
   RECEIVE_USER_CHANNELS,
   RECEIVE_CHANNEL_USERS,
   RECEIVE_ERRORS,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  ADD_NOTIFICATION,
+  CLEAR_NOTIFICATIONS
 } from '../actions/channel_actions';
 import merge from 'lodash/merge';
 
@@ -36,6 +38,16 @@ const ChannelReducer = (state = initState, action) => {
       return nextState;
     case CLEAR_ERRORS:
       nextState.errors = [];
+      return nextState;
+    case ADD_NOTIFICATION:
+      if(nextState.channels[action.channelId].notifications !== undefined){
+        nextState.channels[action.channelId].notifications++;
+      } else {
+        nextState.channels[action.channelId].notifications = 1;
+      }
+      return nextState;
+    case CLEAR_NOTIFICATIONS:
+      nextState.channels[action.channelId].notifications = 0;
       return nextState;
     default:
       return state;
