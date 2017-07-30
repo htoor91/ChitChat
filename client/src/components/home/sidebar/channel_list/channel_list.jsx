@@ -6,6 +6,9 @@ import CreationForm from './creation_form';
 class ChannelList extends React.Component {
   constructor(props){
     super(props);
+
+    const self = this;
+
     this.state = {
       modalOpen: false,
       channelModal: false,
@@ -27,6 +30,12 @@ class ChannelList extends React.Component {
         zIndex                : '1000'
       }
     };
+
+    this.props.socket.on('receive channel', (payload) => {
+      if(payload.userIds.includes(self.props.user._id)){
+        self.props.addChannel(payload.channel.channel);
+      }
+    });
 
     this.openChannelModal = this.openChannelModal.bind(this);
     this.openMessageModal = this.openMessageModal.bind(this);
@@ -72,7 +81,7 @@ class ChannelList extends React.Component {
 
         <h2 className="private-channels-header">Direct Messages
           <span> ({privateListItems.length})</span>
-          <i onClick={this.openMessageModal} 
+          <i onClick={this.openMessageModal}
             className="fa fa-plus-square"
             aria-hidden="true"></i>
         </h2>
@@ -97,7 +106,8 @@ class ChannelList extends React.Component {
             allUsers={this.props.allUsers}
             fetchUsers={this.props.fetchUsers}
             fetchUserChannels={this.props.fetchUserChannels}
-            publicChannels={this.props.publicChannels}/>
+            publicChannels={this.props.publicChannels}
+            socket={this.props.socket}/>
           </Modal>
       </div>
     );
