@@ -1,10 +1,6 @@
 import React from 'react';
 import ChatListItem from './chat_list_item';
 import NewMessageForm from './new_message_form';
-// import io from 'socket.io-client';
-// const socket = io();
-
-
 
 class ChatList extends React.Component {
   constructor(props){
