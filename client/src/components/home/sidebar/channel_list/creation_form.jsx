@@ -87,6 +87,8 @@ class CreationForm extends React.Component {
       channel.userIds = this.state.selectedUsers.map((user) => user._id);
       console.log(channel);
       this.props.createChannel(channel).then((res) => {
+        this.props.socket.emit('broadcast created channel',
+        { channel: res, userIds: channel.userIds });
         this.props.fetchUserChannels(this.props.user._id);
         this.props.history.push(`/messages/${res.channel._id}`);
         this.props.closeModal();
