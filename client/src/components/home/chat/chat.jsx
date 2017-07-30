@@ -2,11 +2,11 @@ import React from 'react';
 import ChatHeader from './chat_header_container';
 import ChatList from './chat_list/chat_list_container';
 
-const Chat = () => {
+const Chat = ({socket}) => {
   return (
     <section id="chat-view-container">
       <ChatHeader />
-      <ChatList />
+      <ChatList socket={socket}/>
     </section>
   );
 };
