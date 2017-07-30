@@ -29,7 +29,7 @@ class Sidebar extends React.Component {
           </i>
           <h2>{this.props.user.username}</h2>
         </div>
-        <ChannelList />
+        <ChannelList socket={this.props.socket}/>
         <Footer />
       </div>
     );
