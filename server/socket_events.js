@@ -23,7 +23,7 @@ module.exports = function(io){
     });
 
     socket.on('broadcast created channel', function(data){
-      socket.broadcast.emit('receive channel', data.channel);
+      socket.broadcast.emit('receive channel', data);
     });
 
   });
