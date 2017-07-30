@@ -4,7 +4,8 @@ import { selectChannels } from '../../../../reducers/selectors';
 import {
   createChannel,
   clearErrors,
-  fetchUserChannels } from '../../../../actions/channel_actions';
+  fetchUserChannels,
+  addChannel } from '../../../../actions/channel_actions';
 import { fetchUsers } from '../../../../actions/user_actions';
 
 const mapStateToProps = (state) => {
@@ -22,7 +23,8 @@ const mapDispatchToProps = (dispatch) => {
     createChannel: (channel) => dispatch(createChannel(channel)),
     clearErrors: () => dispatch(clearErrors()),
     fetchUsers: () => dispatch(fetchUsers()),
-    fetchUserChannels: (userId) => dispatch(fetchUserChannels(userId))
+    fetchUserChannels: (userId) => dispatch(fetchUserChannels(userId)),
+    addChannel: (channel) => dispatch(addChannel(channel))
   });
 };
 
