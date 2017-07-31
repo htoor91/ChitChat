@@ -1,6 +1,9 @@
 import React from 'react';
 import ChatListItem from './chat_list_item';
 import NewMessageForm from './new_message_form';
+import Detail from './detail';
+import { Route } from 'react-router';
+
 
 class ChatList extends React.Component {
   constructor(props){
@@ -59,6 +62,8 @@ class ChatList extends React.Component {
           <ul ref="chatMessages" className="chat-message-list">
             { messages }
           </ul>
+          <Route exact path="/messages/:channelId/details"
+            render={() => <Detail channel={this.props.channel} channelId={this.props.channelId}/>}/>
         </div>
         <footer id="new-message-footer">
           <NewMessageForm
