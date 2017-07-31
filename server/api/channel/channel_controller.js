@@ -35,7 +35,7 @@ exports.getUsers = function(req, res, next){
   let users = [];
 
   Membership.find({channelId: channelId})
-    .populate('userId', '_id username')
+    .populate('userId', '_id username aviUrl')
     .exec()
     .then(function(memberships){
       memberships.forEach(function(membership){
