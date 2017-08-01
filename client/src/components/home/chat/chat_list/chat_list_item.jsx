@@ -13,11 +13,11 @@ class ChatListItem extends React.Component {
     return(
       <li className="chat-message">
         <div className="message-content-container">
-          <img id="message-avi" src={this.props.message.userId.aviUrl }/>
+          <img className="message-avi" src={this.props.message.userId.aviUrl }/>
           <div className="message-content">
-            <span id="message-author">{this.props.message.userId.username}</span> <span id="message-time">{time}</span>
+            <span className="message-author">{this.props.message.userId.username}</span> <span className="message-time">{time}</span>
             <br />
-            {messageContent}
+            <span className="message-words">{messageContent}</span>
           </div>
         </div>
       </li>
