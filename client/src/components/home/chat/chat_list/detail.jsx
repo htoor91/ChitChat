@@ -38,9 +38,8 @@ class DetailView extends React.Component{
           </div>
           <div id="detail-user-info">
             <div id="detail-user-count-header">
-              <h3> <i id="detail-fa" className="fa fa-user-o" aria-hidden="true"></i>
-                {userCount} members
-              </h3>
+              <i id="detail-fa" className="fa fa-user-o" aria-hidden="true"></i>
+              <h3>{userCount} members</h3>
             </div>
             <ul id="detail-user-list">
               {userList}
