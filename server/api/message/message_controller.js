@@ -34,7 +34,7 @@ exports.post = function(req, res, next){
   Message.create(req.body)
     .then(function(message){
       Message.findOne(message)
-        .populate('userId', '_id username')
+        .populate('userId', '_id username aviUrl')
         .exec()
         .then(function(populatedMessage){
           res.json(populatedMessage);

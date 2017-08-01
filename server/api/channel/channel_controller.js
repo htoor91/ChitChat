@@ -52,7 +52,7 @@ exports.getMessages = function(req, res, next){
   let messages = {};
 
   Message.find({channelId: channelId})
-    .populate('userId', '_id username')
+    .populate('userId', '_id username aviUrl')
     .exec()
     .then(function(messageArr){
       messageArr.forEach(function(msg){
