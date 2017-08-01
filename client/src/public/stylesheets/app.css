@@ -36,6 +36,7 @@ textarea,
 button {
   -webkit-appearance: none;
   -moz-appearance: none;
+	outline: 0
 }
 
 button,
@@ -58,7 +59,7 @@ html {
 body {
   height: 100%;
   min-width: 768px;
-  font-size: 16px;
+  font-size: 13px;
   line-height: 1rem;
   background: #FFF;
   color: #555459;
@@ -66,6 +67,7 @@ body {
   overflow-y: hidden;
   overflow-x: hidden;
   display: flex;
+	font-family: 'Open Sans', sans-serif;
 }
 
 #main {
@@ -77,8 +79,6 @@ body {
   display: flex;
 }
 
-
-
 /* SIDEBAR */
 
 .sidebar-container {
@@ -86,8 +86,8 @@ body {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  min-width: 1px;
-  max-width: 274px;
+  min-width: 220px;
+  width: 220px;
   background: #4D394B;
   z-index: 201;
   border-right: 1px solid #E8E8E8;
@@ -101,13 +101,15 @@ body {
 .sidebar-header h1 {
   color: #FFFFFF;
   font-weight: bold;
+	font-size: 28px;
+	padding-left: 10px;
 }
 
 .sidebar-header h2 {
   display: inline;
 }
 
-h2 {
+.sidebar-container h2 {
   font-size: 1em;
   color: #AB9BA9;
 }
@@ -134,7 +136,7 @@ h2 {
 #fa-online-status {
   margin-left: 13px;
   margin-right: 8px;
-  font-size: .85em;
+  font-size: .75em;
   color: #38978D;
 }
 
@@ -145,6 +147,11 @@ h2 {
   font-weight: 400;
   position: relative;
   left: 14px;
+	margin-top: 30px;
+}
+
+.public-channels-list, .private-channels-list {
+	padding-left: 25px;
 }
 
 .fa-plus-square {
@@ -157,7 +164,10 @@ h2 {
 }
 
 .channel-list-container span {
-
+	font-size: 12px;
+	color: #7C6A7A;
+	padding-left: 2px;
+	vertical-align: top;
 }
 
 .private-channels-list li {
@@ -166,6 +176,10 @@ h2 {
 
 .list-item {
 	padding-right: 15px;
+}
+
+#notifications {
+	color: white;
 }
 
 /* SIDEBAR FOOTER */
@@ -188,4 +202,122 @@ h2 {
 
 #chat-view-container {
 	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.all-messages-container {
+	height: 100%;
+}
+
+#chat-list-and-detail-container {
+	display: flex;
+	flex-direction: row;
+}
+
+.chat-message-list {
+	flex: 1 0 500px;
+}
+
+#detail-view {
+	flex: 1;
+}
+
+/* CHAT HEADER */
+
+#chat-team-header {
+	border-bottom: 1px solid #E8E8E8;
+	background-color: #fff;
+	font-weight: bold;
+	color: #2C2D30;
+	width: 100%;
+	font-size: 18px;
+	display: inline-block;
+	height: 7vh;
+	box-sizing: border-box;
+	padding-top: 9px;
+	font-family: 'Open Sans', sans-serif;
+}
+
+#detail-view-toggle {
+	cursor: pointer;
+	position: absolute;
+	top: 22px;
+}
+
+#channel-count-of-users {
+	font-size: 12px;
+	font-weight: normal;
+	padding-left: 5px;
+}
+
+#chat-header-content {
+	padding-top: 5px;
+	padding-left: 20px;
+	position: relative;
+}
+
+/* CHAT FOOTER */
+
+#new-message-footer {
+	position: fixed;
+	bottom: 0px;
+	width: calc(100% - 250px);
+	margin-bottom: 2rem;
+}
+
+#new-message-input {
+	margin: 0 1.25rem;
+	padding: 0 12px;
+	font-size: 14px;
+	color: #3D3C40;
+  border: 2px solid #717274;
+	border-radius: 6px;
+}
+
+#message-content-input {
+	min-height: 41px;
+	width: 100%;
+	border: none;
+}
+
+/* CHAT ITEMS */
+
+#message-avi {
+	width: 38px;
+	height: 38px;
+}
+
+/* DETAIL VIEW */
+
+#detail-view {
+	display: flex;
+	flex-flow: column;
+}
+
+#detail-view-header {
+	color: #000;
+	background: #F7F7F7;
+	height: 60px;
+	display: flex;
+	align-items: center;
+}
+
+#detail-view-exit {
+  font-size: 20px;
+	margin-left: auto;
+	padding-right: 15px;
+}
+
+#detail-view-exit.fa.fa-times::before{
+	cursor: pointer;
+
+}
+
+#about-team-header {
+	color: #000;
+	font-weight: bold;
+	font-size: 18px;
+	padding-left: 20px;
+	margin: 0;
 }
