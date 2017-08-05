@@ -508,7 +508,7 @@ body {
 /* GIPHY */
 
 #giphy-form {
-	width: 300px;
+	width: 316px;
 	height: 300px;
 	left: 22px;
 	bottom: 70px;
@@ -522,8 +522,8 @@ body {
 }
 
 #search-giphy-box {
-	margin-top: auto;
 	width: 100%;
+	height: 36px;
 	border: none;
 	border-top: 1px solid #717274;
 	border-bottom-left-radius: 4px;
@@ -548,4 +548,29 @@ body {
 	width: 4px;
 	background-color: #E8E8E8;
 	height: 200px;
+}
+
+#giphys-container {
+  display: flex;
+  overflow: scroll;
+  height: 260px;
+}
+
+#giphys-list {
+  list-style: none;
+  padding: 0;
+  max-height: 80%;
+  margin: 0px;
+}
+
+#giphy-image {
+  height: 70px;
+  width: 96px;
+  margin: 3px 3px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+#giphy-image:hover {
+	filter: opacity(60%);
 }
