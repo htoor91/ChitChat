@@ -11,9 +11,9 @@ const path = require('path');
 mongoose.Promise = require('bluebird');
 mongoose.connect(config.db.url);
 
-if (config.seed) {
-  require('./util/seed');
-}
+// if (config.seed) {
+//   require('./util/seed');
+// }
 
 // Make static files publically available
 app.use(express.static(path.join(__dirname, '..', 'client', 'src', 'public')));
