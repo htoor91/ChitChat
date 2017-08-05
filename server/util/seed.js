@@ -2,6 +2,7 @@ const User = require('../api/user/user_model');
 const Channel = require('../api/channel/channel_model');
 const Message = require('../api/message/message_model');
 const Membership = require('../api/membership/membership_model');
+const Emoticon = require('../api/emoticon/emoticon_model');
 const _ = require('lodash');
 const logger = require('./logger');
 
@@ -29,7 +30,7 @@ const createDoc = function(model, doc) {
 
 const cleanDB = function() {
   logger.log('... cleaning the DB');
-  const cleanPromises = [User, Channel, Message, Membership]
+  const cleanPromises = [User, Channel, Message, Membership, Emoticon]
     .map(function(model) {
       return model.remove().exec();
     });
