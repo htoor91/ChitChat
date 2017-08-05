@@ -4,7 +4,8 @@ import {
   EDIT_MESSAGE,
   RECEIVE_CHANNEL_MESSAGES,
   RECEIVE_ERRORS,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  ADD_EMOTICON
 } from '../actions/message_actions';
 import merge from 'lodash/merge';
 
@@ -27,6 +28,9 @@ const MessageReducer = (state = initState, action) => {
       return nextState;
     case EDIT_MESSAGE:
       nextState.messages[action.updatedMessage._id] = action.updatedMessage;
+      return nextState;
+    case ADD_EMOTICON:
+      nextState.messages[action.updatedMessage._id].emoticons = action.updatedMessage.emoticons;
       return nextState;
     case RECEIVE_CHANNEL_MESSAGES:
       nextState.messages = action.channelMessages;
