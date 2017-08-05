@@ -21,6 +21,10 @@ class ChatList extends React.Component {
       }
     });
 
+    this.props.socket.on('receive emoticon', (payload) => {
+      self.props.addEmoticon(payload.message.updatedMessage);
+    });
+
     this.scrollToBottom = this.scrollToBottom.bind(this);
   }
 
@@ -38,7 +42,7 @@ class ChatList extends React.Component {
 
   scrollToBottom(){
     setTimeout( () => {
-      let height = this.refs.chatMessages.scrollHeight;
+      const height = this.refs.chatMessages.scrollHeight;
       this.refs.chatMessages.scrollTop = height;
     }, 0);
   }
@@ -52,7 +56,10 @@ class ChatList extends React.Component {
             message={message}
             deleteMessage={this.props.deleteMessage}
             currentUser={this.props.currentUser}
-            updateMessage={this.props.updateMessage} />;
+            updateMessage={this.props.updateMessage}
+            createEmoticon={this.props.createEmoticon}
+            socket={this.props.socket}
+            channelId={this.props.channelId}/>;
         }
       );
 
@@ -73,7 +80,9 @@ class ChatList extends React.Component {
             scrollToBottom={this.scrollToBottom}
             userId={this.props.currentUser._id}
             channelId={this.props.channel._id}
-            socket={this.props.socket} />
+            socket={this.props.socket}
+            fetchGifs={this.props.fetchGifs}
+            giphys={this.props.giphys}/>
         </footer>
         {this.scrollToBottom()}
       </section>
