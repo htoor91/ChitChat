@@ -1,7 +1,6 @@
 import { RECEIVE_GIFS } from '../actions/giphy_actions';
 import merge from 'lodash/merge';
 
-
 const initState = {
   giphys: []
 };
@@ -14,9 +13,6 @@ const GiphysReducer = (state = initState, action) => {
     case RECEIVE_GIFS:
       nextState.giphys = action.giphys;
       return nextState;
-    // case RECEIVE_GIF:
-    //   nextState.gif = action.giphy;
-    //   return nextState;
     default:
       return state;
   }
