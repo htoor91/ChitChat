@@ -26,5 +26,9 @@ module.exports = function(io){
       socket.broadcast.emit('receive channel', data);
     });
 
+    socket.on('broadcast emoticon', function(data){
+      socket.broadcast.to(data.channel).emit('receive emoticon', data);
+    });
+
   });
 };
