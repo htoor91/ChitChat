@@ -1,4 +1,5 @@
 import Message from '../util/message_util';
+import Emoticon from '../util/emoticon_util';
 
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';
@@ -6,6 +7,7 @@ export const EDIT_MESSAGE = 'EDIT_MESSAGE';
 export const RECEIVE_CHANNEL_MESSAGES = 'RECEIVE_CHANNEL_MESSAGES';
 export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const ADD_EMOTICON = 'ADD_EMOTICON';
 
 export function createMessage(message) {
   return (dispatch) => {
@@ -44,6 +46,17 @@ export function fetchChannelMessages(channelId){
   };
 }
 
+export function createEmoticon(emoticon){
+  return (dispatch) => {
+    return Emoticon.createEmoticon(emoticon).then(
+      (updatedMessage) => dispatch(addEmoticon(updatedMessage)),
+      (err) => dispatch(receiveErrors(err))
+    );
+  };
+}
+
+
+
 export const addMessage = (message) => {
   return {
     type: ADD_MESSAGE,
@@ -62,6 +75,13 @@ export const removeMessage = (removedMessage) => {
 export const editMessage = (updatedMessage) => {
   return {
     type: EDIT_MESSAGE,
+    updatedMessage
+  };
+};
+
+export const addEmoticon = (updatedMessage) => {
+  return {
+    type: ADD_EMOTICON,
     updatedMessage
   };
 };
