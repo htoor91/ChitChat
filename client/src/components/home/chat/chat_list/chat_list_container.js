@@ -9,7 +9,11 @@ import {
   createMessage,
   deleteMessage,
   updateMessage,
-  addMessage } from '../../../../actions/message_actions';
+  editMessage,
+  addMessage,
+  createEmoticon,
+  addEmoticon } from '../../../../actions/message_actions';
+import { fetchGifs, translateToGif } from '../../../../actions/giphy_actions';
 
 // TODO refactor messages into a selector function.
 
@@ -18,7 +22,8 @@ const mapStateToProps = (state, {match}) => {
     messages: Object.keys(state.messages.messages).map(key => state.messages.messages[key]),
     channel: state.channels.channels[match.params.channelId],
     currentUser: state.auth.currentUser,
-    channelId: match.params.channelId
+    channelId: match.params.channelId,
+    giphys: state.giphys.giphys,
   };
 };
 
@@ -28,9 +33,13 @@ const mapDispatchToProps = (dispatch) => {
     createMessage: (message) => dispatch(createMessage(message)),
     deleteMessage: (messageId) => dispatch(deleteMessage(messageId)),
     updateMessage: (message) => dispatch(updateMessage(message)),
+    editMessage: (message) => dispatch(editMessage(message)),
     addMessage: (message) => dispatch(addMessage(message)),
     addNotification: (channelId) => dispatch(addNotification(channelId)),
-    clearNotifications: (channelId) => dispatch(clearNotifications(channelId))
+    clearNotifications: (channelId) => dispatch(clearNotifications(channelId)),
+    createEmoticon: (emoticon) => dispatch(createEmoticon(emoticon)),
+    addEmoticon: (updatedMessage) => dispatch(addEmoticon(updatedMessage)),
+    fetchGifs: (searchTerm) => dispatch(fetchGifs(searchTerm))
   };
 };
 
