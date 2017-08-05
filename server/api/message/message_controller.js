@@ -29,8 +29,6 @@ exports.getOne = function(req, res, next){
 };
 
 exports.post = function(req, res, next){
-  const user = req.body.user;
-
   Message.create(req.body)
     .then(function(message){
       Message.findOne(message)
