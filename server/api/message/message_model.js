@@ -18,7 +18,9 @@ const MessageModel = new Schema({
     type: String,
     required: true
   },
-  chatTime: String
+  emoticons: [
+    {userId: String, icon: String}
+  ]
 }, {timestamps: true});
 
 module.exports = mongoose.model('message', MessageModel);
