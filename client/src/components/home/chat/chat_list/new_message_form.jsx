@@ -1,5 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router';
+import EmoticonList from './emoticon_list';
+import GiphySearch from './giphy_search';
+import Giphy from '../../../../util/giphy_util';
+
 
 class NewMessageForm extends React.Component {
   constructor(props){
@@ -8,6 +12,8 @@ class NewMessageForm extends React.Component {
       channelId: this.props.channelId,
       userId: this.props.userId,
       content: '',
+      emoticonListOpen: false,
+      giphyOpen: false
     };
 
     this.updateContent = this.updateContent.bind(this);
@@ -15,10 +21,18 @@ class NewMessageForm extends React.Component {
     this.createMessage = this.createMessage.bind(this);
     this.updateContent = this.updateContent.bind(this);
     this.clearState = this.clearState.bind(this);
+    this.toggleEmoticonDisplay = this.toggleEmoticonDisplay.bind(this);
+    this.addEmoticon = this.addEmoticon.bind(this);
+    this.toggleGiphySearch = this.toggleGiphySearch.bind(this);
+    this.addGiphy = this.addGiphy.bind(this);
+    this.translateGif = this.translateGif.bind(this);
   }
 
-  createMessage(){
+  createMessage(custom=null){
     const msg = this.state;
+    if(custom){
+      msg.content = custom;
+    }
     this.state.channelId = this.props.match.params.channelId;
     this.props.createMessage(msg).then((createdMsg) => {
       this.props.scrollToBottom();
@@ -33,10 +47,29 @@ class NewMessageForm extends React.Component {
     this.setState({content: e.currentTarget.value});
   }
 
+  translateGif(){
+    const searchTerm = this.state.content.split(' ').slice(1).join(' ');
+
+    return new Promise((resolve, reject) => {
+      Giphy.translateToGif(searchTerm).then((giphy) => {
+        return resolve('giphy:' + giphy.data.images.fixed_height.url);
+      });
+    });
+  }
+
   handleKeyPress(e){
     if (e.key === 'Enter') {
-      this.setState({userId: this.props.userId, channelId: this.props.channelId} );
-      this.createMessage();
+      this.setState({
+        userId: this.props.userId,
+        channelId: this.props.channelId
+      });
+      if(this.state.content.startsWith('/giphy ')){
+        this.translateGif().then((custom) => {
+          this.createMessage(custom);
+        });
+      } else {
+        this.createMessage();
+      }
     }
   }
 
@@ -44,18 +77,70 @@ class NewMessageForm extends React.Component {
     this.setState({content: ''});
   }
 
+  toggleEmoticonDisplay(){
+    this.setState({ emoticonListOpen: !this.state.emoticonListOpen });
+  }
+
+  addEmoticon(emoticon){
+    if(this.state.content){
+      this.setState({content: this.state.content + " " + emoticon});
+    } else {
+      this.setState({content: emoticon});
+    }
+    $("#message-content-input").focus();
+  }
+
+  toggleGiphySearch() {
+    this.setState({ giphyOpen: !this.state.giphyOpen });
+  }
+
+  addGiphy(giphy) {
+    this.clearState();
+    this.setState({ content: `giphy:${giphy}` });
+    $("#message-content-input").focus();
+  }
+
   render(){
-    const placeholder = "Enter message here";
+    let emoticonList;
+    let giphySearch;
+    if(this.state.emoticonListOpen){
+      emoticonList = <EmoticonList
+        addEmoticon={this.addEmoticon}
+        toggleEmoticonDisplay={this.toggleEmoticonDisplay}/>;
+    }
+    if (this.state.giphyOpen) {
+        giphySearch = (
+          <GiphySearch
+            addGiphy={this.addGiphy}
+            toggleGiphySearch={this.toggleGiphySearch}
+            fetchGifs={this.props.fetchGifs}
+            giphys={this.props.giphys}/>
+        );
+    }
+
+    let placeholder = this.props.channel.private ? '@' : '#';
+    placeholder = "Message " + placeholder + this.props.channel.name;
 
     return (
       <div id="new-message-input">
+        <div id="new-message-giphy" onClick={this.toggleGiphySearch}>
+          <i className="fa fa-plus" aria-hidden="true"></i>
+        </div>
         <input
           id="message-content-input"
           onChange={this.updateContent}
           type="text"
           value={this.state.content}
           onKeyPress={this.handleKeyPress}
-          placeholder={placeholder} />
+          placeholder={placeholder}
+          autoComplete="off"/>
+        <div id="emoji-toggle">
+          {emoticonList}
+          <i className="fa fa-smile-o"
+            aria-hidden="true"
+            onClick={this.toggleEmoticonDisplay}></i>
+         </div>
+         {giphySearch}
       </div>
     );
   }
