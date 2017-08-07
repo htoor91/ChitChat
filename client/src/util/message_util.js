@@ -3,7 +3,7 @@ const MessageUtil = {
   createMessage(message){
     return $.ajax({
       method: "POST",
-      url: "/api/messages",
+      url: `/api/messages?access_token=${localStorage.jwt}`,
       data: message
     });
   },
@@ -18,14 +18,14 @@ const MessageUtil = {
   deleteMessage(messageId){
     return $.ajax({
       method: 'DELETE',
-      url: `/api/messages/${messageId}`
+      url: `/api/messages/${messageId}?access_token=${localStorage.jwt}`
     });
   },
 
   updateMessage(message){
     return $.ajax({
       method: 'PUT',
-      url: `/api/messages/${message._id}`,
+      url: `/api/messages/${message._id}?access_token=${localStorage.jwt}`,
       data: message
     });
   }

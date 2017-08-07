@@ -3,7 +3,7 @@ const ChannelUtil = {
   createChannel(channel){
     return $.ajax({
       method: "POST",
-      url: "/api/channels",
+      url: `/api/channels?access_token=${localStorage.jwt}`,
       data: channel
     });
   },
@@ -18,7 +18,7 @@ const ChannelUtil = {
   deleteChannel(channelId){
     return $.ajax({
       method: 'DELETE',
-      url: `/api/channels/${channelId}`
+      url: `/api/channels/${channelId}?access_token=${localStorage.jwt}`
     });
   },
 
