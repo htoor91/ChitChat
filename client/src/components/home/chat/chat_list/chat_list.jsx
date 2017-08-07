@@ -56,7 +56,7 @@ class ChatList extends React.Component {
   }
 
   render(){
-    if (this.props.channel === undefined) return <p></p>; // TODO
+    if (this.props.channel === undefined || !this.props.currentUser) return <p></p>;
 
     const messages = this.props.messages.map((message) => {
       return <ChatListItem
