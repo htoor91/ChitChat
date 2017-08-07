@@ -2,7 +2,11 @@ import React from 'react';
 
 const Logout = ({ logout, user }) => {
   const toggle = () => {
-    document.getElementById('logout-dropdown').classList.toggle('hidden');
+    const dropdownEl = document.getElementById('logout-dropdown');
+    if(dropdownEl){
+      dropdownEl.classList.toggle('hidden');
+      document.removeEventListener("click", toggle);
+    }
   };
 
   const dropdown = (e) => {
@@ -19,13 +23,16 @@ const Logout = ({ logout, user }) => {
   const logoutHandler = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    toggle();
     logout();
   };
 
   let username;
+  let userAvi;
 
   if(user){
     username = user.username;
+    userAvi = user.aviUrl;
   }
 
   return (
@@ -34,6 +41,7 @@ const Logout = ({ logout, user }) => {
         <li>
           <div id="logout-box" className="logout-box">
             <div id="logout-box-user-display">
+              <img src={userAvi} />
               <div id="logout-box-user-details">
                 <p id="logout-box-username">{username}</p>
                 <p id="logout-box-handle">@{username}</p>
