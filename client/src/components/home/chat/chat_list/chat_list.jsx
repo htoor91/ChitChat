@@ -25,6 +25,14 @@ class ChatList extends React.Component {
       self.props.addEmoticon(payload.message.updatedMessage);
     });
 
+    this.props.socket.on('receive updated message', (payload) => {
+      self.props.editMessage(payload.message.updatedMessage);
+    });
+
+    this.props.socket.on('receive deleted message', (payload) => {
+      self.props.removeMessage(payload.message.removedMessage);
+    });
+
     this.scrollToBottom = this.scrollToBottom.bind(this);
   }
 
