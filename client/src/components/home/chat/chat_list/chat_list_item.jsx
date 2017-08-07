@@ -31,6 +31,7 @@ class ChatListItem extends React.Component {
     this.toggleEmoticonDisplay = this.toggleEmoticonDisplay.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
     this.editMessage = this.editMessage.bind(this);
+    this.cancelEdit = this.cancelEdit.bind(this);
     this.toggleEditForm = this.toggleEditForm.bind(this);
     this.updateContent = this.updateContent.bind(this);
     this.addEmoticon = this.addEmoticon.bind(this);
@@ -134,6 +135,11 @@ class ChatListItem extends React.Component {
     }
   }
 
+  cancelEdit(){
+    this.setState({content: this.props.message.content});
+    this.toggleEditForm();
+  }
+
   emoticonReactions(emoticons){
     if (emoticons.length === 0) { return ""; }
     let counts = {};
@@ -195,10 +201,19 @@ class ChatListItem extends React.Component {
     } else if(this.state.showEditForm) {
       messageContent = <form onSubmit={ this.editMessage }>
         <input
-           id="message-content-input"
+           id="message-edit-input"
+           className="message-content-input"
            onChange={this.updateContent}
            type="text"
            value={this.state.content}/>
+         <div className="edit-buttons">
+           <button className="edit-cancel-button" onClick={this.cancelEdit}>
+             Cancel
+           </button>
+           <button id="edit-submit-button" onClick={this.editMessage}>
+             Save Changes
+           </button>
+         </div>
        </form>;
     }
 
