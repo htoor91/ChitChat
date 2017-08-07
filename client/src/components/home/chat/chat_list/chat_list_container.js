@@ -11,6 +11,7 @@ import {
   updateMessage,
   editMessage,
   addMessage,
+  removeMessage,
   createEmoticon,
   addEmoticon } from '../../../../actions/message_actions';
 import { fetchGifs, translateToGif } from '../../../../actions/giphy_actions';
@@ -35,6 +36,7 @@ const mapDispatchToProps = (dispatch) => {
     updateMessage: (message) => dispatch(updateMessage(message)),
     editMessage: (message) => dispatch(editMessage(message)),
     addMessage: (message) => dispatch(addMessage(message)),
+    removeMessage: (message) => dispatch(removeMessage(message)),
     addNotification: (channelId) => dispatch(addNotification(channelId)),
     clearNotifications: (channelId) => dispatch(clearNotifications(channelId)),
     createEmoticon: (emoticon) => dispatch(createEmoticon(emoticon)),
