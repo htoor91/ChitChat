@@ -30,5 +30,13 @@ module.exports = function(io){
       socket.broadcast.to(data.channel).emit('receive emoticon', data);
     });
 
+    socket.on('broadcast updated message', function(data){
+      socket.broadcast.to(data.channel).emit('receive updated message', data);
+    });
+
+    socket.on('broadcast deleted message', function(data){
+      socket.broadcast.to(data.channel).emit('receive deleted message', data);
+    });
+
   });
 };
