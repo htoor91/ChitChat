@@ -7,14 +7,11 @@ router.param('id', controller.params);
 
 router.route('/')
   .get(controller.get)
-  .post(controller.post);
+  .post(checkUser, controller.post);
 
 router.route('/:id')
   .get(controller.getOne)
-  .put(controller.put)
-  .delete(controller.delete);
+  .put(checkUser, controller.put)
+  .delete(checkUser, controller.delete);
 
 module.exports = router;
-
-
-// TODO: MAKE SURE checkUser middleware is passed to post and delete
