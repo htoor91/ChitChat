@@ -134,11 +134,10 @@ class NewMessageForm extends React.Component {
           onKeyPress={this.handleKeyPress}
           placeholder={placeholder}
           autoComplete="off"/>
-        <div id="emoji-toggle">
+        <div id="emoticon-toggle" onClick={this.toggleEmoticonDisplay}>
           {emoticonList}
           <i className="fa fa-smile-o"
-            aria-hidden="true"
-            onClick={this.toggleEmoticonDisplay}></i>
+            aria-hidden="true"></i>
          </div>
          {giphySearch}
       </div>
