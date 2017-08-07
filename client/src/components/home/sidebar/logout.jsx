@@ -22,6 +22,12 @@ const Logout = ({ logout, user }) => {
     logout();
   };
 
+  let username;
+
+  if(user){
+    username = user.username;
+  }
+
   return (
     <i id="fa-bars-menu" className="fa fa-bars" aria-hidden="true" onClick={dropdown}>
       <ul id="logout-dropdown" className="hidden">
@@ -29,8 +35,8 @@ const Logout = ({ logout, user }) => {
           <div id="logout-box" className="logout-box">
             <div id="logout-box-user-display">
               <div id="logout-box-user-details">
-                <p id="logout-box-username">{user.username}</p>
-                <p id="logout-box-handle">@{user.username}</p>
+                <p id="logout-box-username">{username}</p>
+                <p id="logout-box-handle">@{username}</p>
               </div>
             </div>
             <button id="logout-box-logout-btn" onClick={logoutHandler}>Logout</button>
