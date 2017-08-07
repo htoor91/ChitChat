@@ -16,7 +16,17 @@ class ChatListItem extends React.Component {
       showEditForm: false,
       emoticonListOpen: false,
       icon: "",
+      messageButtonClass: "message-buttons invisible",
+      deleteModalClass: "delete-modal hidden"
      };
+
+     this.alertOptions = {
+      offset: 25,
+      position: 'bottom left',
+      theme: 'dark',
+      time: 0,
+      transition: 'scale'
+    };
 
     this.toggleEmoticonDisplay = this.toggleEmoticonDisplay.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
@@ -25,12 +35,29 @@ class ChatListItem extends React.Component {
     this.updateContent = this.updateContent.bind(this);
     this.addEmoticon = this.addEmoticon.bind(this);
     this.emoticonReactions = this.emoticonReactions.bind(this);
+    this.openDeleteModal = this.openDeleteModal.bind(this);
+    this.closeDeleteModal = this.closeDeleteModal.bind(this);
+  }
+
+  openDeleteModal(){
+    if (this.props.currentUser._id !== this.props.message.userId._id){
+      this.showAlert("You don't have delete privileges for this message!");
+    } else {
+      this.setState({deleteModalClass: "delete-modal"});
+    }
+  }
+
+  closeDeleteModal(){
+    this.setState({deleteModalClass: "delete-modal hidden"});
   }
 
   toggleEmoticonDisplay(){
-    document
-    .getElementById('message-button-toggle')
-    .classList.toggle('invisible');
+    if(this.state.messageButtonClass.indexOf("invisible") > -1){
+      this.setState({messageButtonClass: "message-buttons"});
+    } else{
+      this.setState({messageButtonClass: "message-buttons invisible"});
+    }
+
     this.setState({ emoticonListOpen: !this.state.emoticonListOpen });
   }
 
@@ -75,28 +102,32 @@ class ChatListItem extends React.Component {
   deleteMessage(e){
     e.preventDefault();
     if (this.props.currentUser._id !== this.props.message.userId._id) {
-      this.showAlert("You are not the author of this message");
+      this.showAlert("You don't have delete privileges for this message!");
     } else {
       this.props.deleteMessage(this.props.message._id);
     }
   }
 
-  // componentDidUpdate(){
-  //   if ($(".emoji-form span").first().offset() && $(".emoji-form span").first().offset().top < 40){
-  //     let oldTop = $(".emoji-form span").first().offset().top;
-  //     let oldLeft = $(".emoji-form span").first().offset().left;
-  //     $(".emoji-form span").first().offset({top: oldTop + 300, left: oldLeft - 60 });
-  //   }
-  // }
+  componentDidUpdate(){
+    if ($(".emoticon-form span").first().offset() && $(".emoticon-form span").first().offset().top < 40){
+      const oldTop = $(".emoticon-form span").first().offset().top;
+      const oldLeft = $(".emoticon-form span").first().offset().left;
+      $(".emoticon-form span").first().offset({top: oldTop + 300, left: oldLeft - 60 });
+    }
+  }
 
   toggleEditForm(){
-    this.setState({showEditForm: !this.state.showEditForm});
+    if (this.props.currentUser._id !== this.props.message.userId._id) {
+      this.showAlert("You don't have edit privileges for this message!");
+    } else {
+      this.setState({showEditForm: !this.state.showEditForm});
+    }
   }
 
   editMessage(e){
     e.preventDefault();
     if (this.props.currentUser._id !== this.props.message.userId._id) {
-      this.showAlert("You are not the author of this message");
+      this.showAlert("You don't have edit privileges for this message!");
     } else {
       this.toggleEditForm();
       this.props.updateMessage(this.state);
@@ -129,7 +160,7 @@ class ChatListItem extends React.Component {
 
   showAlert(text){
     this.msg.show(text, {
-      time: 2000,
+      time: 2500,
       type: 'info'
     });
   }
@@ -171,28 +202,67 @@ class ChatListItem extends React.Component {
        </form>;
     }
 
-    return(
-      <li className="chat-message">
-        <div className="message-content-container">
-          <img className="message-avi" src={this.props.message.userId.aviUrl }/>
-          <div className="message-content">
-            <span className="message-author">{this.props.message.userId.username}</span> <span className="message-time">{time}</span>
-            <br />
-            <span className="message-words">{messageContent}</span>
-            <div id="reaction-list">
-              {reactions}
+    const messageItem = (
+      <div className="message-content-container">
+        <img className="message-avi" src={this.props.message.userId.aviUrl }/>
+        <div className="message-content">
+          <span className="message-author">{this.props.message.userId.username}</span> <span className="message-time">{time}</span>
+          <br />
+          <span className="message-words">{messageContent}</span>
+          <div id="reaction-list">
+            {reactions}
+          </div>
+        </div>
+      </div>
+    );
+
+    const alert = (
+      <AlertContainer id="alert-container"
+        ref={a => this.msg = a} {...this.alertOptions} />
+    );
+
+    const buttons = (
+      <span className={this.state.messageButtonClass}>
+        <i className="fa fa-smile-o fa-6" aria-hidden="true" onClick={this.toggleEmoticonDisplay}></i>
+        <i className="fa fa-pencil-square-o fa-6" aria-hidden="true" onClick={this.toggleEditForm}></i>
+        <i className="fa fa-times-circle-o fa-6" aria-hidden="true" onClick={this.openDeleteModal}></i>
+      </span>
+    );
+
+    const modal = (
+      <div className={this.state.deleteModalClass}>
+        <div className="delete-modal-content">
+          <div className="delete-modal-header">
+            <h2>Delete message</h2>
+          </div>
+          <br/>
+          <div className="delete-modal-body">
+            <p>Are you sure you want to delete this message? This cannot be undone.</p>
+            <br/>
+            <div className="delete-modal-message-item">
+              {messageItem}
+            </div>
+            <br/>
+            <div className="delete-modal-buttons">
+              <button className="delete-modal-cancel-button" onClick={this.closeDeleteModal}>
+                Cancel
+              </button>
+              <button id="delete-modal-button" onClick={this.deleteMessage}>
+                Delete
+              </button>
             </div>
           </div>
-          <AlertContainer
-            id="alert-container"
-            ref={a => this.msg = a} {...this.alertOptions} />
-          {emoticonList}
         </div>
-        <span className="message-buttons">
-          <i className="fa fa-smile-o fa-6" aria-hidden="true" onClick={this.toggleEmoticonDisplay}></i>
-          <i className="fa fa-pencil-square-o fa-6" aria-hidden="true" onClick={this.editMessage}></i>
-          <i className="fa fa-times-circle-o fa-6" aria-hidden="true" onClick={this.deleteMessage}></i>
-        </span>
+      </div>
+    );
+
+    return(
+      <li className="chat-message">
+        {messageItem}
+        {emoticonList}
+        {alert}
+        {buttons}
+        {modal}
       </li>
     );
   }
