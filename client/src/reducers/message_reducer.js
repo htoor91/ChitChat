@@ -27,7 +27,8 @@ const MessageReducer = (state = initState, action) => {
       delete nextState.messages[action.removedMessage._id];
       return nextState;
     case EDIT_MESSAGE:
-      nextState.messages[action.updatedMessage._id] = action.updatedMessage;
+      nextState.messages[action.updatedMessage._id].updatedAt = action.updatedMessage.updatedAt;
+      nextState.messages[action.updatedMessage._id].content = action.updatedMessage.content;
       return nextState;
     case ADD_EMOTICON:
       nextState.messages[action.updatedMessage._id].emoticons = action.updatedMessage.emoticons;
