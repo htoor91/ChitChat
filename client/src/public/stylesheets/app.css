@@ -274,7 +274,7 @@ body {
 	display: flex;
 }
 
-#message-content-input {
+.message-content-input {
 	min-height: 41px;
 	width: 100%;
 	border: none;
@@ -629,6 +629,7 @@ body {
 .delete-modal-message-item {
 	border: 1px solid #e8e8e8;
   padding: 5px 20px;
+	border-radius: 3px;
 }
 
 .delete-modal-buttons {
@@ -636,7 +637,7 @@ body {
 	justify-content: flex-end;
 }
 
-.delete-modal-buttons button {
+.delete-modal-buttons button, .edit-buttons button {
 	border: 1px solid #C7CACD;
 	padding: 14px 16px;
 	margin-left: 10px;
@@ -646,9 +647,17 @@ body {
 	border-radius: 5px;
 }
 
-.delete-modal-buttons button:hover {
+.delete-modal-buttons button:hover, .edit-buttons button:hover {
 	background: #fff;
 	color: #007AB8;
+}
+
+.edit-buttons {
+	margin-top: 10px;
+}
+
+.edit-buttons button {
+	padding: 6px 12px;
 }
 
 #delete-modal-button {
@@ -657,6 +666,16 @@ body {
 	border: none;
 }
 
-#delete-modal-button:hover {
+#edit-submit-button {
+	background: #2ab27b;
+	color: #fff;
+	border: none;
+}
+
+#delete-modal-button:hover, #edit-submit-button:hover {
 	box-shadow: inset 0 -2px rgba(0,0,0,.25);
+}
+
+#message-edit-input {
+	width: 600px;
 }
