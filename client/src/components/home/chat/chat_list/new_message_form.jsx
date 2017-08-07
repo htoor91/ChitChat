@@ -127,7 +127,7 @@ class NewMessageForm extends React.Component {
           <i className="fa fa-plus" aria-hidden="true"></i>
         </div>
         <input
-          id="message-content-input"
+          className="message-content-input"
           onChange={this.updateContent}
           type="text"
           value={this.state.content}
