@@ -74,8 +74,7 @@ class ChatListItem extends React.Component {
 
     if(!duplicate){
       this.setState({
-        content: this.state.content + " " + emoticon,
-        icon: emoticon,
+        icon: emoticon
       });
 
       const emoticonState = {
@@ -105,7 +104,11 @@ class ChatListItem extends React.Component {
     if (this.props.currentUser._id !== this.props.message.userId._id) {
       this.showAlert("You don't have delete privileges for this message!");
     } else {
-      this.props.deleteMessage(this.props.message._id);
+      this.props.deleteMessage(this.props.message._id).then((deletedMessage) => {
+        this.props.socket.emit('broadcast deleted message', {
+          message: deletedMessage, channel: this.props.channelId
+        });``
+      });
     }
   }
 
@@ -131,7 +134,11 @@ class ChatListItem extends React.Component {
       this.showAlert("You don't have edit privileges for this message!");
     } else {
       this.toggleEditForm();
-      this.props.updateMessage(this.state);
+      this.props.updateMessage(this.state).then((updatedMessage) => {
+        this.props.socket.emit('broadcast updated message', {
+          message: updatedMessage, channel: this.props.channelId
+        });
+      });
     }
   }
 
