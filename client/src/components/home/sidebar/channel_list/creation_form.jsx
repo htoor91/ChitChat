@@ -36,8 +36,13 @@ class CreationForm extends React.Component {
     };
   }
 
-  selectUser(user) {
+  clearErrors(){
     this.props.clearErrors();
+    this.setState({ errors: [] });
+  }
+
+  selectUser(user) {
+    this.clearErrors();
     if (user.username !== this.props.user.username && !(this.state.selectedUsers.includes(user))) {
       let currentSelectedUsers = this.state.selectedUsers;
       currentSelectedUsers.push(user);
@@ -47,7 +52,7 @@ class CreationForm extends React.Component {
 
   deselectUser(user) {
     event.preventDefault();
-    this.props.clearErrors();
+    this.clearErrors();
     let i = this.state.selectedUsers.indexOf(user);
     let newSelectedUsers = this.state.selectedUsers.slice(0, i).concat(this.state.selectedUsers.slice(i+1));
     this.setState({selectedUsers: newSelectedUsers});
@@ -59,17 +64,25 @@ class CreationForm extends React.Component {
       return channel.name;
     });
 
+    this.clearErrors();
+
     if(this.state.name === ""){
       let newErrors = this.state.errors;
-      newErrors.push("Please enter a title!");
+      if(newErrors[0] !== "Please enter a title!"){
+        newErrors.push("Please enter a title!");
+      }
       this.setState({ errors: newErrors});
     } else if(!this.state.private && allChannelNames.includes(this.state.name)){
       let newErrors = this.state.errors;
-      newErrors.push("That channel name already exists!");
+      if(newErrors[0] !== "That channel name already exists!"){
+        newErrors.push("That channel name already exists!");
+      }
       this.setState({ errors: newErrors});
     } else if(this.state.private && this.state.selectedUsers.length < 2){
       let newErrors = this.state.errors;
-      newErrors.push("Please select at least one user to DM with!");
+      if(newErrors[0] !== "Please select at least one user to DM with!"){
+        newErrors.push("Please select at least one user to DM with!");
+      }
       this.setState({ errors: newErrors});
     } else {
       let channel = this.state;
@@ -92,7 +105,7 @@ class CreationForm extends React.Component {
         this.props.fetchUserChannels(this.props.user._id);
         this.props.history.push(`/messages/${res.channel._id}`);
         this.props.closeModal();
-        this.props.clearErrors();
+        this.clearErrors();
       });
     }
   }
@@ -106,6 +119,7 @@ class CreationForm extends React.Component {
         this.props.errors.push(error);
       });
     }
+
     const errors = this.props.errors.map((error, i) => (
       <li className="creation-form-error-item" key={`error-${i}`}>
         {error}
@@ -130,12 +144,13 @@ class CreationForm extends React.Component {
         <i id="delete-selected-user"
           className="fa fa-times-circle-o"
           aria-hidden="true"
-          onClick={() => this.deselectUser(selectedUser)}>X</i>
+          onClick={() => this.deselectUser(selectedUser)}></i>
         );
       }
 
       return (
         <li className="selected-user" key={`selected-${selectedUser._id}`}>
+          <img src={selectedUser.aviUrl}/>
           {selectedUser.username}
           {deselect}
         </li>
@@ -155,6 +170,7 @@ class CreationForm extends React.Component {
             onClick={() => this.selectUser(user)}
             className="new-channel-user-list-item"
             key={`user-list-${user._id}`}>
+            <img id="user-dropdown-logo" src={user.aviUrl} />
             {user.username}
           </li>
         );
@@ -164,37 +180,43 @@ class CreationForm extends React.Component {
 
     return (
       <div className="creation-form-container">
-        <div id="exit-new-channel" onClick={this.props.closeModal}>
+        <div id="exit-new-channel" onClick={() => {
+            if(this.props.errors){
+              this.clearErrors();
+            }
+            this.props.closeModal(); }}>
           <FAClose className="fa fa-times fa-3x" aria-hidden="true"/>
         </div>
-        <form className="creation-form">
-          <ul className="creation-form-errors-list">
-            {errors}
-          </ul>
-          <h1>{title}</h1>
-          {channelInput}
-          <div className="creation-form-user-filter">
-            <input type="text"
-              id="new-channel-add-users-input"
-              value={this.state.allUsers}
-              onChange={this.update('allUsers')}
-              className="new-channel-input"
-              placeholder="Filter by username" />
-
-            <button onClick={this.createChannel}
-              id="new-channel-button"
-              type="submit"
-              value="Submit">Submit</button>
-          </div>
-          <div id="selected-users">
-            <ul id="selected-users-list">
-              { selectedUsers }
+        <div className="new-channel-window">
+          <form className="creation-form">
+            <ul className="creation-form-errors-list">
+              {errors}
             </ul>
-          </div>
-          <ul id="all-users-list">
-            { userList }
-          </ul>
-        </form>
+            <h1>{title}</h1>
+            {channelInput}
+            <div className="creation-form-user-filter">
+              <input type="text"
+                id="new-channel-add-users-input"
+                value={this.state.allUsers}
+                onChange={this.update('allUsers')}
+                className="new-channel-input"
+                placeholder="Filter by username" />
+
+              <button onClick={this.createChannel}
+                id="new-channel-button"
+                type="submit"
+                value="Submit">Submit</button>
+            </div>
+            <div id="selected-users">
+              <ul id="selected-users-list">
+                { selectedUsers }
+              </ul>
+            </div>
+            <ul id="all-users-list">
+              { userList }
+            </ul>
+          </form>
+        </div>
       </div>
     );
   }
