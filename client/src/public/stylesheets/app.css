@@ -127,6 +127,8 @@ body {
 	padding: 20px;
 	border-radius: 5px;
 	font-family: 'Open Sans', sans-serif;
+	cursor: auto;
+	font-size: 14px;
 }
 
 #logout-box-user-display{
@@ -158,7 +160,8 @@ body {
   position: absolute;
   top: 33px;
   right: 13px;
-  font-size: 1.2em;
+  font-size: 20px;
+	cursor: pointer;
 }
 
 #fa-online-status {
@@ -702,7 +705,7 @@ body {
 	border: none;
 }
 
-#delete-modal-button:hover, #edit-submit-button:hover, #logout-box-button:hover {
+#delete-modal-button:hover, #edit-submit-button:hover, #logout-box-button:hover, #new-channel-button:hover {
 	box-shadow: inset 0 -2px rgba(0,0,0,.25);
 }
 
@@ -714,4 +717,198 @@ body {
 	padding: 10px 12px;
 	margin: auto;
 	font-weight: bold;
+}
+
+/* CHANNEL CREATION MODAL */
+
+#exit-new-channel {
+	position: absolute;
+	right: 70px;
+	top: 114px;
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	cursor: pointer;
+	color: #717274;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	text-align: center;
+	z-index: 100;
+}
+
+.new-channel-window {
+	max-height: 91%;
+	margin-top: 9%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	position: relative;
+}
+
+.creation-form {
+	width: 45%;
+}
+
+#new-channel-title {
+	color: #3D3C40;
+	font-size: 20px;
+	font-weight: 300;
+	margin-top: 4px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-flex: 1;
+	-ms-flex-positive: 1;
+	flex-grow: 1;
+}
+
+.creation-form-user-filter {
+	position: relative;
+	display: flex;
+}
+
+.new-channel-input {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	padding: 8px 12px 12px 12px;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	border: 1px solid #E0E0E0;
+	border-radius: 6px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	margin-top: 10px;
+}
+
+#new-channel-add-users-input {
+	color: #3D3C40;
+  font-size: 20px;
+  font-weight: 300;
+  margin-top: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  margin-bottom: 7px;
+}
+
+#new-channel-button {
+	background-color: #2ab27b;
+  border: none;
+  height: 45px;
+  border-radius: 4px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  margin-left: 16px;
+  cursor: pointer;
+  margin-top: 6px;
+  outline: none;
+  padding: 12px 16px;
+}
+
+.selected-user {
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-weight: 300;
+    padding: 8px 10px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    background-color: #4C9689;
+    color: white;
+    border-radius: 3px;
+    width: 176px;
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    /* justify-content: space-between; */
+}
+
+.selected-user img {
+	height: 36px;
+	margin-right: 20px;
+	border-radius: 5px;
+}
+
+#delete-selected-user {
+	cursor: pointer;
+	font-size: 19px;
+	align-self: flex-start;
+	margin-left: auto;
+}
+
+#selected-users-list {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	padding: 0;
+}
+
+#all-users-list {
+	width: 100%;
+	overflow: hidden;
+	overflow-y: scroll;
+	height: 90vh;
+	padding: 0;
+	border-top: 1px solid #E0E0E0;
+}
+
+.new-channel-user-list-item {
+	border-bottom: 1px solid #E0E0E0;
+  border-left: 1px solid #E0E0E0;
+  border-right: 1px solid #E0E0E0;
+  height: 64px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-left: 16px;
+  cursor: pointer;
+  color: #555459;
+	font-size: 16px;
+  font-weight: bold;
+}
+
+.new-channel-user-list-item:hover {
+	background: #edf7fd;
+}
+
+#user-dropdown-logo {
+	margin-right: 5px;
+	border-radius: 4px;
+	height: 36px;
 }
