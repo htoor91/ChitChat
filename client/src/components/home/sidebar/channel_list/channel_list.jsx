@@ -70,7 +70,7 @@ class ChannelList extends React.Component {
         <h2 className="public-channels-header">Channels
           <span> ({publicListItems.length})</span>
           <i onClick={this.openChannelModal}
-            className="fa fa-plus-square"
+            className="fa fa-plus-square open-channel-creation-modal"
             aria-hidden="true"></i>
         </h2>
         <ul className="public-channels-list">
@@ -80,7 +80,7 @@ class ChannelList extends React.Component {
         <h2 className="private-channels-header">Direct Messages
           <span> ({privateListItems.length})</span>
           <i onClick={this.openMessageModal}
-            className="fa fa-plus-square"
+            className="fa fa-plus-square open-channel-creation-modal"
             aria-hidden="true"></i>
         </h2>
         <ul className="private-channels-list">
