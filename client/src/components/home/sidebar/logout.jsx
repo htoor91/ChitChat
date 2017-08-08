@@ -37,20 +37,16 @@ const Logout = ({ logout, user }) => {
 
   return (
     <i id="fa-bars-menu" className="fa fa-bars" aria-hidden="true" onClick={dropdown}>
-      <ul id="logout-dropdown" className="hidden">
-        <li>
-          <div id="logout-box" className="logout-box">
-            <div id="logout-box-user-display">
-              <img src={userAvi} />
-              <div id="logout-box-user-details">
-                <p id="logout-box-username">{username}</p>
-                <p id="logout-box-handle">@{username}</p>
-              </div>
-            </div>
-            <button id="logout-box-logout-btn" onClick={logoutHandler}>Logout</button>
+      <div id="logout-dropdown" className="hidden">
+        <div id="logout-box-user-display">
+          <img src={userAvi} />
+          <div id="logout-box-user-details">
+            <p id="logout-box-username">{username}</p>
+            <p id="logout-box-handle">@{username}</p>
           </div>
-        </li>
-      </ul>
+        </div>
+        <button id="logout-box-button" onClick={logoutHandler}>Logout</button>
+      </div>
     </i>
   );
 };
