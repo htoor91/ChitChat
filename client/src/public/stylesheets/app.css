@@ -117,10 +117,40 @@ body {
 }
 
 #logout-dropdown {
-  border: 2px solid black;
-  background: white;
-  color: black;
-  position: absolute;
+	border: 1px solid #e8e8e8;
+	background: #fff;
+	color: #2C2D30;
+	position: absolute;
+	z-index: 1;
+	padding: 0;
+	width: 250px;
+	padding: 20px;
+	border-radius: 5px;
+	font-family: 'Open Sans', sans-serif;
+}
+
+#logout-box-user-display{
+	display: flex;
+}
+
+#logout-box-user-display img {
+	border-radius: 5px;
+	width: 36px;
+	height: 36px;
+}
+
+#logout-box-user-details {
+	margin-left: 10px;
+}
+
+#logout-box-username {
+	font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+#logout-box-handle {
+  color: #A0A0A2;
 }
 
 #fa-bars-menu {
@@ -637,7 +667,7 @@ body {
 	justify-content: flex-end;
 }
 
-.delete-modal-buttons button, .edit-buttons button {
+.delete-modal-buttons button, .edit-buttons button, #logout-box-button {
 	border: 1px solid #C7CACD;
 	padding: 14px 16px;
 	margin-left: 10px;
@@ -660,7 +690,7 @@ body {
 	padding: 6px 12px;
 }
 
-#delete-modal-button {
+#delete-modal-button, #logout-box-button {
 	background: #eb4d5c;
 	color: #fff;
 	border: none;
@@ -672,10 +702,16 @@ body {
 	border: none;
 }
 
-#delete-modal-button:hover, #edit-submit-button:hover {
+#delete-modal-button:hover, #edit-submit-button:hover, #logout-box-button:hover {
 	box-shadow: inset 0 -2px rgba(0,0,0,.25);
 }
 
 #message-edit-input {
 	width: 600px;
+}
+
+#logout-box-button {
+	padding: 10px 12px;
+	margin: auto;
+	font-weight: bold;
 }
