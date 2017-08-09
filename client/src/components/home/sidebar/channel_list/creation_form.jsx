@@ -47,6 +47,7 @@ class CreationForm extends React.Component {
       let currentSelectedUsers = this.state.selectedUsers;
       currentSelectedUsers.push(user);
       this.setState({selectedUsers: currentSelectedUsers});
+      $('#new-channel-add-users-input').focus();
     }
   }
 
@@ -87,14 +88,10 @@ class CreationForm extends React.Component {
     } else {
       let channel = this.state;
       if(this.state.private){
-        let usernames = this.state.selectedUsers
+        const usernames = this.state.selectedUsers
         .map((user) => user.username)
-        .filter((user) => user !== this.props.user.username)
         .join(', ');
 
-        if(usernames.length > 30){
-          usernames = usernames.slice(0, 30) + '...';
-        }
         channel.name = usernames;
       }
       channel.userIds = this.state.selectedUsers.map((user) => user._id);
@@ -102,7 +99,7 @@ class CreationForm extends React.Component {
         this.props.socket.emit('broadcast created channel',
         { channel: res, userIds: channel.userIds });
         this.props.fetchUserChannels(this.props.user._id);
-        this.props.history.push(`/messages/${res.channel._id}`);
+        this.props.history.push(`/messages/${res.channel._id}/details`);
         this.props.closeModal();
         this.clearErrors();
       });
