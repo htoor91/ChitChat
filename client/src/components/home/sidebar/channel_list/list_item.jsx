@@ -16,8 +16,8 @@ const ListItem = ({ channel, currentUser }) => {
     name = "#" + channel.name;
   }
 
-  if(name.length > 20){
-    name = name.slice(0, 20) + '...';
+  if(name.length > 19){
+    name = name.slice(0, 19) + '...';
   }
 
   if(channel.notifications){
