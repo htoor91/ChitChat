@@ -2,8 +2,6 @@ import ChatHeader from './chat_header';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { fetchChannels, fetchChannelUsers } from '../../../actions/channel_actions';
-// import { deleteNotifications } from '../../../../frontend/actions/session_actions';
-
 
 const mapStateToProps = (state, { match }) => {
   const channelId = match.params.channelId;

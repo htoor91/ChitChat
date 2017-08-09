@@ -16,8 +16,6 @@ import {
   addEmoticon } from '../../../../actions/message_actions';
 import { fetchGifs, translateToGif } from '../../../../actions/giphy_actions';
 
-// TODO refactor messages into a selector function.
-
 const mapStateToProps = (state, {match}) => {
   return {
     messages: Object.keys(state.messages.messages).map(key => state.messages.messages[key]),

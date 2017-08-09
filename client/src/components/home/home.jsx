@@ -10,8 +10,6 @@ class Home extends React.Component {
     super(props);
   }
 
-  // TODO fetch notifications on did mount
-
   componentWillReceiveProps(nextProps){
     if(!nextProps.loggedIn){
       this.props.history.push('/');
@@ -22,7 +20,7 @@ class Home extends React.Component {
     return (
       <div className="home-container">
         <Sidebar socket={socket} />
-        <Route path="/messages/:channelId" 
+        <Route path="/messages/:channelId"
           render={ () => <Chat socket={socket}/>}/>
       </div>
     );

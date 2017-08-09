@@ -4,8 +4,6 @@ const controller = require('./user_controller');
 const auth = require('../../auth/auth');
 const checkUser = [auth.decodeToken(), auth.getFreshUser()];
 
-// setup boilerplate route jsut to satisfy a request
-// for building
 router.param('id', controller.params);
 router.get('/me', checkUser, controller.me);
 

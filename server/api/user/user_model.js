@@ -10,7 +10,6 @@ const UserSchema = new Schema({
     unique: true
   },
 
-  // dont store the password as plain text
   password: {
     type: String,
     required: true
@@ -46,11 +45,9 @@ UserSchema.pre('save', function(next){
 });
 
 UserSchema.methods = {
-  // check the passwords on signin
   authenticate: function(plainTextPword) {
     return bcrypt.compareSync(plainTextPword, this.password);
   },
-  // hash the passwords
   encryptPassword: function(plainTextPword) {
     if (!plainTextPword) {
       return '';
@@ -59,7 +56,6 @@ UserSchema.methods = {
       return bcrypt.hashSync(plainTextPword, salt);
     }
   },
-
   toJson: function() {
     const obj = this.toObject();
     delete obj.password;

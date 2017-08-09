@@ -5,7 +5,6 @@ const config = {
   test: 'testing',
   prod: 'production',
   port: process.env.PORT || 3000,
-  // 10 days in minutes
   expireTime: 24 * 60 * 10,
   secrets: {
     jwt: process.env.JWT || 'gumball'
@@ -18,7 +17,7 @@ config.env = process.env.NODE_ENV;
 var envConfig;
 
 try {
-  envConfig = require('./' + config.env); // Could error out if doesn't exist.
+  envConfig = require('./' + config.env);
   envConfig = envConfig || {};
 } catch(e) {
   envConfig = {};
