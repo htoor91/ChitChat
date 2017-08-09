@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import faker from 'faker';
-import logo from '../../../public/img/splash-logo.png';
+import logo from '../../../public/img/chat.png';
 
 
 class AuthForm extends React.Component {
@@ -10,6 +10,7 @@ class AuthForm extends React.Component {
     this.state = {
       username: '',
       password: '',
+      confirmPassword: '',
       userErrors: '',
       passErrors: ''
     };
@@ -69,10 +70,16 @@ class AuthForm extends React.Component {
         passErrors: "Password must be at least 6 characters long"
       });
     } else {
-      this.setState( {
-        passErrors: ""
-      });
-      validPass = true;
+      if(this.state.password !== this.state.confirmPassword && this.props.path === "/signup"){
+        this.setState({
+          passErrors: "Please make sure your passwords match"
+        });
+      } else {
+        this.setState( {
+          passErrors: ""
+        });
+        validPass = true;
+      }
     }
 
     return validUser && validPass;
@@ -138,13 +145,13 @@ class AuthForm extends React.Component {
   redirectLinks() {
     if (this.props.path === '/login') {
       return (
-        <span>
+        <span className="auth-redirect-links">
           Need an account? <Link to="/signup">Sign up</Link>
         </span>
       );
     } else {
       return (
-        <span>
+        <span className="auth-redirect-links">
           Have an account? <Link to="/login">Login</Link>
         </span>
       );
@@ -176,39 +183,62 @@ class AuthForm extends React.Component {
     if(this.props.path === "/login"){
       return (
         <button
-          className="guest-login-button"
-          onClick={this.demoLogin}>Guest Login</button>
+          id="splash-guest-button"
+          className="splash-button"
+          onClick={this.demoLogin}>Guest</button>
       );
     }
   }
 
   render() {
     const formType = this.props.path.slice(1);
+    let confirmPassLabel;
+    let confirmPassInput;
+    let loginErrors;
+
+    if(formType === 'signup'){
+      confirmPassLabel = (
+        <label htmlFor="confirmPassword">Confirm password:</label>
+      );
+      confirmPassInput = (
+        <input type="password"
+          className="auth-pass-input"
+          onChange={this.update('confirmPassword')}/>
+      );
+    } else {
+      loginErrors = <div className="auth-login-errors">{this.props.loginErrors}</div>;
+    }
+
+
 
     return (
-      <div className="auth-container">
-        <img src={logo} className="auth-logo"/>
-        <h1 className="auth-header">ChitChat</h1>
-        <h2 className="auth-headline">Collaboration made easy</h2>
-        <div className="auth-login-errors">{this.props.loginErrors}</div>
-        {this.renderGuestButton()}
-        {this.renderSignupErrors()}
-        <form className="auth-form" onSubmit={this.handleSubmit}>
-          <label htmlFor="username">Username:</label>
-          <input type="text"
-            className="auth-user-input"
-            placeholder="Enter username"
-            onChange={this.update('username')}/>
-          <label htmlFor="password">Password:</label>
-          <input type="password"
-            className="auth-pass-input"
-            onChange={this.update('password')}/>
-          <button className="auth-submit-button"
-            type="submit"
-            value="Submit">{formType}</button>
-        </form>
-        {this.redirectLinks()}
-      </div>
+      <section className="splash-container">
+        <div className="splash-wrapper">
+          <img src={logo}/>
+          <h1 className="welcome-page-header">ChitChat</h1>
+          <h2 className="welcome-page-subheading">Where work happens.</h2>
+          {loginErrors}
+          {this.renderGuestButton()}
+          {this.renderSignupErrors()}
+          <form className="auth-form" onSubmit={this.handleSubmit}>
+            <label htmlFor="username">Username:</label>
+            <input type="text"
+              className="auth-user-input"
+              placeholder="Enter username"
+              onChange={this.update('username')}/>
+            <label htmlFor="password">Password:</label>
+            <input type="password"
+              className="auth-pass-input"
+              onChange={this.update('password')}/>
+            {confirmPassLabel}
+            {confirmPassInput}
+            <button className="splash-button"
+              type="submit"
+              value="Submit">{formType}</button>
+          </form>
+          {this.redirectLinks()}
+        </div>
+      </section>
     );
   }
 }
