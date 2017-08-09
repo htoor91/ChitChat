@@ -62,10 +62,14 @@ class ChannelList extends React.Component {
 
   render(){
     const publicListItems = this.props.publicChannels.map((channel) =>
-      <ChannelListItem key={channel._id} channel={channel} />
+      <ChannelListItem key={channel._id}
+        channel={channel}
+        currentUser={this.props.user} />
     );
     const privateListItems = this.props.privateChannels.map((channel) =>
-      <ChannelListItem key={channel._id} channel={channel} />
+      <ChannelListItem key={channel._id}
+        channel={channel}
+        currentUser={this.props.user}/>
     );
 
     return (
