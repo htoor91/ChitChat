@@ -40,8 +40,17 @@ class ChatHeader extends React.Component {
     let userCount;
     if(this.props.channel && this.props.channel.users){
       channel = this.props.channel;
-      channelName = channel.private ? "@" + channel.name : "#" + channel.name;
       userCount = channel.users.length;
+      if(channel.private){
+        let usernames = channel.name
+        .split(', ')
+        .filter(username => username !== this.props.currentUser.username)
+        .join(', ');
+
+        channelName = "@" + usernames;
+      } else {
+        channelName = "#" + channel.name;
+      }
     }
 
     return (
