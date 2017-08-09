@@ -292,14 +292,6 @@ body {
 	flex-direction: row;
 }
 
-.chat-message-list {
-	flex: 1 0 500px;
-}
-
-#detail-view {
-	flex: 1;
-}
-
 /* CHAT HEADER */
 
 #chat-team-header {
@@ -403,8 +395,9 @@ body {
   overflow-y: scroll;
   max-height: 86vh;
   margin-bottom: 0;
-  height: 100%;
+  height: 86vh;
 	padding: 0;
+	flex: 1 0 500px;
 }
 
 .message-author {
@@ -520,6 +513,8 @@ body {
 	flex-flow: column;
 	border-left: 1px solid #E8E8E8;
 	max-height: 87vh;
+	height: 87vh;
+	flex: 1;
 }
 
 #detail-view-header {
@@ -663,17 +658,17 @@ body {
 /* MODAL STYLE */
 
 .delete-modal {
-  display: flex; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  display: flex;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); 
 	align-items: baseline;
 	justify-content: center;
 }
