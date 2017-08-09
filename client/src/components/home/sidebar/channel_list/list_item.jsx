@@ -1,10 +1,24 @@
 import React from 'react';
 
-const ListItem = ({ channel }) => {
-  const name = channel.private ? `@${channel.name}` : `#${channel.name}`;
-  const link = channel._id;
+const ListItem = ({ channel, currentUser }) => {
+  const link = channel._id + '/details';
+  let name;
   let listItemName;
 
+  if(channel.private){
+    let usernames = channel.name
+    .split(', ')
+    .filter(username => username !== currentUser.username)
+    .join(', ');
+
+    name = "@" + usernames;
+  } else {
+    name = "#" + channel.name;
+  }
+
+  if(name.length > 20){
+    name = name.slice(0, 20) + '...';
+  }
 
   if(channel.notifications){
     const notification = channel.notifications;
