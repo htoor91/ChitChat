@@ -5,8 +5,6 @@ import { logout } from '../../../actions/auth_actions';
 import { withRouter } from 'react-router';
 import { selectChannels } from '../../../reducers/selectors';
 
-
-
 const mapStateToProps = (state, { match }) => {
   return({
     user: state.auth.currentUser,

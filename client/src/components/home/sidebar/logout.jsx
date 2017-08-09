@@ -1,6 +1,9 @@
 import React from 'react';
 
 const Logout = ({ logout, user }) => {
+  let username;
+  let userAvi;
+  
   const toggle = () => {
     const dropdownEl = document.getElementById('logout-dropdown');
     if(dropdownEl){
@@ -27,8 +30,6 @@ const Logout = ({ logout, user }) => {
     logout();
   };
 
-  let username;
-  let userAvi;
 
   if(user){
     username = user.username;

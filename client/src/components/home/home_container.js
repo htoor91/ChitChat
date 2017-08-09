@@ -8,10 +8,6 @@ const mapStateToProps = (state) => {
   });
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return;
-};
-
 export default withRouter(
   connect(mapStateToProps, null)(Home)
 );

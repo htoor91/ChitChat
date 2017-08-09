@@ -6,7 +6,6 @@ import { fetchChannels, fetchChannelUsers } from '../../../actions/channel_actio
 const mapStateToProps = (state, { match }) => {
   const channelId = match.params.channelId;
   return {
-    user: state.auth.currentUser,
     channel: state.channels.channels[channelId],
     channelId: channelId
   };

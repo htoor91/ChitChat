@@ -12,7 +12,6 @@ class Sidebar extends React.Component {
     this.props.fetchUserChannels(this.props.user._id);
   }
 
-
   componentWillReceiveProps(newProps){
     if (this.props.messageId === ':messageId' &&
       newProps.firstChannel !== undefined) {
