@@ -528,16 +528,21 @@ body {
 #detail-view-header {
 	color: #000;
 	background: #F7F7F7;
-	height: 60px;
+	height: auto;
 	display: flex;
 	align-items: center;
 	border-bottom: 1px solid #E8E8E8;
+	padding: 20px 10px;
 }
 
 #detail-view-exit {
   font-size: 20px;
 	margin-left: auto;
 	padding-right: 15px;
+}
+
+#detail-view-exit:hover {
+	color: #6b6b6b;
 }
 
 #detail-view-exit.fa.fa-times::before{
@@ -770,7 +775,7 @@ body {
 #exit-new-channel {
 	position: absolute;
 	right: 70px;
-	top: 114px;
+	top: 50px;
 	width: 70px;
 	height: 70px;
 	border-radius: 50%;
@@ -791,8 +796,8 @@ body {
 }
 
 .new-channel-window {
-	max-height: 91%;
-	margin-top: 9%;
+	max-height: 80%;
+	margin-top: 0;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -882,11 +887,9 @@ body {
   margin-bottom: 5px;
   margin-right: 5px;
   background-color: #EDF7FD;
-  color: black;
-  border-radius: 3px;
-  width: 176px;
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+	color: #555459;
+	border-radius: 3px;
+  width: 180px;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -934,7 +937,8 @@ body {
 	width: 100%;
 	overflow: hidden;
 	overflow-y: scroll;
-	height: 90vh;
+	height: 400px;
+	max-height: 400px;
 	padding: 0;
 	border-top: 1px solid #E0E0E0;
 }

@@ -23,9 +23,12 @@ class ChannelList extends React.Component {
         bottom                : 'auto',
         transform             : 'translate(-50%, -50%)',
         width                 : '100%',
+        height                : '120vh',
+        border                : 'none'
       },
       overlay: {
-        zIndex                : '1000'
+        zIndex                : '1000',
+        background            : '#fff'
       }
     };
 
