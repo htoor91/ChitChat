@@ -18,16 +18,24 @@ class DetailView extends React.Component{
       let userCount;
       let users;
       let userList;
+      let listUsername;
 
       if(this.props.channel.users){
         userCount = this.props.channel.users.length;
         users = this.props.channel.users;
-        userList = users.map((user) => (
-          <li key={user._id} id="details-user-list-item">
-            <img src={user.aviUrl} />
-            <span id="detail-view-username">{user.username}</span>
-          </li>
-        ));
+        userList = users.map((user) => {
+          if(user.username === this.props.currentUser.username){
+            listUsername = user.username + " (you)";
+          } else {
+            listUsername = user.username;
+          }
+          return(
+            <li key={user._id} id="details-user-list-item">
+              <img src={user.aviUrl} />
+              <span id="detail-view-username">{listUsername}</span>
+            </li>
+          );
+        });
       }
 
       return (
