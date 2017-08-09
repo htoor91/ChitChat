@@ -103,6 +103,7 @@ class NewMessageForm extends React.Component {
   render(){
     let emoticonList;
     let giphySearch;
+    let placeholder;
     if(this.state.emoticonListOpen){
       emoticonList = <EmoticonList
         addEmoticon={this.addEmoticon}
@@ -118,8 +119,16 @@ class NewMessageForm extends React.Component {
         );
     }
 
-    let placeholder = this.props.channel.private ? '@' : '#';
-    placeholder = "Message " + placeholder + this.props.channel.name;
+    if(this.props.channel.private){
+      let usernames = this.props.channel.name
+      .split(', ')
+      .filter(username => username !== this.props.currentUser.username)
+      .join(', ');
+
+      placeholder = "Message @" + usernames;
+    } else {
+      placeholder = "Message #" + this.props.channel.name;
+    }
 
     return (
       <div id="new-message-input">
