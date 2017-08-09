@@ -78,7 +78,9 @@ class ChatList extends React.Component {
             { messages }
           </ul>
           <Route exact path="/messages/:channelId/details"
-            render={() => <Detail channel={this.props.channel} channelId={this.props.channelId}/>}/>
+            render={() => <Detail channel={this.props.channel}
+            channelId={this.props.channelId}
+            currentUser={this.props.currentUser}/>}/>
         </div>
         <footer id="new-message-footer">
           <NewMessageForm
