@@ -40,7 +40,7 @@ class GiphySearch extends React.Component {
   }
 
   selectGiphy(giphy){
-    this.props.addGiphy(giphy);
+    this.props.addGiphy(giphy, this.state.searchTerm);
     this.props.toggleGiphySearch();
   }
 
