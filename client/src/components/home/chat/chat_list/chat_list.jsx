@@ -57,7 +57,7 @@ class ChatList extends React.Component {
   componentWillReceiveProps(newProps){
     if(!this.props.channel && newProps.channel){
       this.props.socket.emit('join channel', {channel: newProps.channelId});
-      this.props.fetchChannelMessages(newProps.channelId);
+      this.props.fetchChannelMessages(newProps.channelId).then(this.scrollToBottom);
     } else if(this.props.channelId !== newProps.channelId){
       this.props.socket.emit('leave channel', {channel: this.props.channelId});
       this.props.socket.emit('join channel', {channel: newProps.channelId});
