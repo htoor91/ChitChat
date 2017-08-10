@@ -58,7 +58,7 @@ class NewMessageForm extends React.Component {
   }
 
   handleKeyPress(e){
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && this.state.content.length > 0) {
       this.setState({
         userId: this.props.userId,
         channelId: this.props.channelId
