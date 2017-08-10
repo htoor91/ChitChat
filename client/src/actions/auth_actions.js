@@ -30,7 +30,7 @@ export function signup(user) {
       (res) => {
         localStorage.setItem('jwt', res.token);
         localStorage.setItem('currentUser', JSON.stringify(res.user));
-        return dispatch(receiveCurrentUser(res.user));
+        return dispatch(receiveCurrentUser(res.user, 'signup'));
       },
       (errors) => dispatch(receiveErrors([errors.responseText]))
     );
@@ -38,10 +38,11 @@ export function signup(user) {
 }
 
 
-export const receiveCurrentUser = (currentUser) => {
+export const receiveCurrentUser = (currentUser, formType) => {
   return {
     type: RECEIVE_CURRENT_USER,
     currentUser,
+    formType
   };
 };
 
