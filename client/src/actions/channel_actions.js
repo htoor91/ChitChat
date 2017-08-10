@@ -1,6 +1,7 @@
 import Channel from '../util/channel_util';
 
 export const ADD_CHANNEL = 'ADD_CHANNEL';
+export const ADD_USER_TO_CHANNEL = 'ADD_USER_TO_CHANNEL';
 export const REMOVE_CHANNEL = 'REMOVE_CHANNEL';
 export const RECEIVE_USER_CHANNELS = 'RECEIVE_USER_CHANNELS';
 export const RECEIVE_CHANNEL_USERS = 'RECEIVE_CHANNEL_USERS';
@@ -49,6 +50,14 @@ export const addChannel = (channel) => {
   return {
     type: ADD_CHANNEL,
     channel
+  };
+};
+
+export const addUserToChannel = (channelId, newUser) => {
+  return {
+    type: ADD_USER_TO_CHANNEL,
+    channelId,
+    newUser
   };
 };
 
