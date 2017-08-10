@@ -53,7 +53,7 @@ class NewMessageForm extends React.Component {
 
     return new Promise((resolve, reject) => {
       Giphy.translateToGif(searchTerm).then((giphy) => {
-        return resolve('giphy:' + giphy.data.images.fixed_height.url);
+        return resolve('giphy:' + giphy.data.images.fixed_height.url + ' ' + searchTerm);
       });
     });
   }
@@ -95,9 +95,10 @@ class NewMessageForm extends React.Component {
     this.setState({ giphyOpen: !this.state.giphyOpen });
   }
 
-  addGiphy(giphy) {
+  addGiphy(giphy, searchTerm) {
+    const custom = `giphy:${giphy} ${searchTerm}`;
     this.clearState();
-    this.setState({ content: `giphy:${giphy}` });
+    this.createMessage(custom);
     $(".message-content-input").focus();
   }
 
@@ -144,8 +145,12 @@ class NewMessageForm extends React.Component {
           <p><span>/giphy</span> [text]</p>
           <p>Post a random gif to channel</p>
         </div>
-    );
+      );
     }
+
+    // if(this.state.postGiphy){
+    //   this.createMessage();
+    // }
 
     return (
       <div id="new-message-input">
