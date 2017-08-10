@@ -1,5 +1,6 @@
 import {
   ADD_CHANNEL,
+  ADD_USER_TO_CHANNEL,
   REMOVE_CHANNEL,
   RECEIVE_USER_CHANNELS,
   RECEIVE_CHANNEL_USERS,
@@ -29,6 +30,9 @@ const ChannelReducer = (state = initState, action) => {
       return nextState;
     case RECEIVE_USER_CHANNELS:
       nextState.channels = action.userChannels;
+      return nextState;
+    case ADD_USER_TO_CHANNEL:
+      nextState.channels[action.channelId].users.push(action.newUser);
       return nextState;
     case RECEIVE_CHANNEL_USERS:
       nextState.channels[action.channelId].users = action.channelUsers;
