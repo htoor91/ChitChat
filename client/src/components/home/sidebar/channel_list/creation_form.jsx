@@ -59,11 +59,26 @@ class CreationForm extends React.Component {
     this.setState({selectedUsers: newSelectedUsers});
   }
 
+  isDuplicate(channelArr, channelName){
+    const sortedChannelName = channelName.split('').sort().join();
+    for(let i = 0; i < channelArr.length; i++){
+      if(channelArr[i].split('').sort().join() === sortedChannelName){
+        return true;
+      }
+    }
+    return false;
+  }
+
   createChannel(e){
     e.preventDefault();
     const allChannelNames = this.props.publicChannels.map((channel) => {
       return channel.name;
     });
+
+    const allPrivateChannelNames = this.props.privateChannels
+    .map(channel => channel.name);
+
+    let duplicate = false;
 
     this.clearErrors();
 
@@ -86,23 +101,37 @@ class CreationForm extends React.Component {
       }
       this.setState({ errors: newErrors});
     } else {
+
       let channel = this.state;
       if(this.state.private){
         const usernames = this.state.selectedUsers
         .map((user) => user.username)
         .join(', ');
 
-        channel.name = usernames;
+        if(this.isDuplicate(allPrivateChannelNames, usernames)){
+          duplicate = true;
+        } else{
+          channel.name = usernames;
+        }
       }
-      channel.userIds = this.state.selectedUsers.map((user) => user._id);
-      this.props.createChannel(channel).then((res) => {
-        this.props.socket.emit('broadcast created channel',
-        { channel: res, userIds: channel.userIds });
-        this.props.fetchUserChannels(this.props.user._id);
-        this.props.history.push(`/messages/${res.channel._id}/details`);
-        this.props.closeModal();
-        this.clearErrors();
-      });
+
+      if(duplicate){
+        let newErrors = this.state.errors;
+        if(newErrors[0] !== "That DM already exists!"){
+          newErrors.push("That DM already exists!");
+        }
+        this.setState({ errors: newErrors });
+      } else{
+        channel.userIds = this.state.selectedUsers.map((user) => user._id);
+        this.props.createChannel(channel).then((res) => {
+          this.props.socket.emit('broadcast created channel',
+          { channel: res, userIds: channel.userIds });
+          this.props.fetchUserChannels(this.props.user._id);
+          this.props.history.push(`/messages/${res.channel._id}/details`);
+          this.clearErrors();
+          this.props.closeModal();
+        });
+      }
     }
   }
 
