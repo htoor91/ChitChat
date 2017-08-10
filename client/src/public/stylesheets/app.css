@@ -655,6 +655,43 @@ body {
 	filter: opacity(60%);
 }
 
+#giphy-autocomplete {
+	position: absolute;
+  width: 90%;
+  height: 55px;
+  background: white;
+  top: -55px;
+  left: 55px;
+  border: 1px solid #717274;
+  padding: 12px;
+  cursor: pointer;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: none;
+}
+
+#giphy-autocomplete:hover {
+	background: #2D9EE0;
+	border: 1px solid transparent;
+}
+
+#giphy-autocomplete:hover p, #giphy-autocomplete:hover span {
+	color: #fff!important;
+}
+
+#giphy-autocomplete span {
+	color: black;
+	font-weight: bold;
+}
+
+#giphy-autocomplete p {
+	color: #555459;
+}
+
+#giphy-autocomplete p:last-child {
+	color: #717274;
+}
+
 /* MODAL STYLE */
 
 .delete-modal {
