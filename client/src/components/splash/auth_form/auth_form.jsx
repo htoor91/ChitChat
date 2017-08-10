@@ -134,7 +134,7 @@ class AuthForm extends React.Component {
             clearInterval(slowPassInput);
           }
           if (username.length === 0 && password.length === 0){
-            self.props.signup(user).then(()=> self.props.history.push("/"));
+            self.props.signup(user);
           }
         }, timeout);
       }
