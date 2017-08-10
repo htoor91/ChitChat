@@ -8,19 +8,21 @@ class ChatHeader extends React.Component {
   }
 
   componentDidMount(){
-    if(this.props.channelId !== ':messageId'){
+    if(this.props.channelId !== ":messageId"){
       this.props.fetchChannelUsers(this.props.channelId);
     }
   }
 
-  shouldComponentUpdate(newProps){
-    if(this.props.channel && !newProps.channel.users){
-      this.props.fetchChannelUsers(newProps.channelId);
-      return true;
-    } else if (newProps.channel.users) {
-      return true;
-    } else {
-      return false;
+  componentWillReceiveProps(newProps){
+    if(this.props.channelId !== newProps.channelId){
+      newProps.fetchChannelUsers(newProps.channelId);
+    }
+    if(!this.props.channel && newProps.channel.name === "general" &&
+  newProps.formType === 'signup'){
+      const self = this;
+      this.props.socket.emit('broadcast new signup', {
+        user: self.props.currentUser
+      });
     }
   }
 
@@ -41,7 +43,7 @@ class ChatHeader extends React.Component {
     if(this.props.channel && this.props.channel.users){
       channel = this.props.channel;
       userCount = channel.users.length;
-      if(channel.private){
+      if(channel.private && this.props.currentUser){
         let usernames = channel.name
         .split(', ')
         .filter(username => username !== this.props.currentUser.username)
