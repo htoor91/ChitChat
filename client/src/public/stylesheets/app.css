@@ -810,6 +810,11 @@ body {
 	width: 45%;
 }
 
+.creation-form-errors-list {
+	color: red;
+	font-weight: bold;
+}
+
 #new-channel-title {
 	color: #3D3C40;
 	font-size: 20px;
