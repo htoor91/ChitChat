@@ -615,6 +615,15 @@ body {
 
 #gif-container {
 	display: flex;
+	flex-direction: column;
+}
+
+#bar-message-container {
+	display: flex;
+}
+
+#gif-caption {
+	font-weight: bold;
 }
 
 #gif-message {
@@ -622,6 +631,7 @@ body {
 	max-width: 300px;
 	border-radius: 3px;
 	margin-left: 10px;
+	margin-bottom: 10px;
 }
 
 #left-gif-bar {
