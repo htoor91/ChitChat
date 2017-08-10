@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import ChatList from './chat_list';
 import {
   addNotification,
-  clearNotifications } from '../../../../actions/channel_actions';
+  clearNotifications,
+  addUserToChannel,
+  fetchChannelUsers,
+  addChannel } from '../../../../actions/channel_actions';
 import {
   fetchChannelMessages,
   createMessage,
@@ -39,7 +42,10 @@ const mapDispatchToProps = (dispatch) => {
     clearNotifications: (channelId) => dispatch(clearNotifications(channelId)),
     createEmoticon: (emoticon) => dispatch(createEmoticon(emoticon)),
     addEmoticon: (updatedMessage) => dispatch(addEmoticon(updatedMessage)),
-    fetchGifs: (searchTerm) => dispatch(fetchGifs(searchTerm))
+    fetchGifs: (searchTerm) => dispatch(fetchGifs(searchTerm)),
+    fetchChannelUsers: (channelId) => dispatch(fetchChannelUsers(channelId)),
+    addUserToChannel: (channelId, newUser) => dispatch(addUserToChannel(channelId, newUser)),
+    addChannel: (channel) => dispatch(addChannel(channel))
   };
 };
 
