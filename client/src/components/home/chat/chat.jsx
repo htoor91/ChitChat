@@ -5,7 +5,7 @@ import ChatList from './chat_list/chat_list_container';
 const Chat = ({socket}) => {
   return (
     <section id="chat-view-container">
-      <ChatHeader />
+      <ChatHeader socket={socket}/>
       <ChatList socket={socket}/>
     </section>
   );
