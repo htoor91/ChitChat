@@ -148,10 +148,6 @@ class NewMessageForm extends React.Component {
       );
     }
 
-    // if(this.state.postGiphy){
-    //   this.createMessage();
-    // }
-
     return (
       <div id="new-message-input">
         <div id="new-message-giphy" onClick={this.toggleGiphySearch}>
