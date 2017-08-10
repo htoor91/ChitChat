@@ -27,8 +27,8 @@ class Sidebar extends React.Component {
       username = this.props.user.username;
     }
     return(
-      <div className="sidebar-container">
-        <div className="sidebar-header">
+      <div id="sidebar-container">
+        <div id="sidebar-header">
           <h1>ChitChat</h1>
           <Logout logout={this.props.logout} user={this.props.user}/>
           <i id='fa-online-status' className='fa fa-circle' aria-hidden='true'>
