@@ -5,7 +5,7 @@ const ListItem = ({ channel, currentUser }) => {
   let name;
   let listItemName;
 
-  if(channel.private){
+  if(channel.private && currentUser){
     let usernames = channel.name
     .split(', ')
     .filter(username => username !== currentUser.username)
