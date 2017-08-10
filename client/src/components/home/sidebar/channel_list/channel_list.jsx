@@ -32,12 +32,6 @@ class ChannelList extends React.Component {
       }
     };
 
-    this.props.socket.on('receive channel', (payload) => {
-      if(payload.userIds.includes(self.props.user._id)){
-        self.props.addChannel(payload.channel.channel);
-      }
-    });
-
     this.openChannelModal = this.openChannelModal.bind(this);
     this.openMessageModal = this.openMessageModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -112,6 +106,7 @@ class ChannelList extends React.Component {
             fetchUsers={this.props.fetchUsers}
             fetchUserChannels={this.props.fetchUserChannels}
             publicChannels={this.props.publicChannels}
+            privateChannels={this.props.privateChannels}
             socket={this.props.socket}/>
           </Modal>
       </div>
