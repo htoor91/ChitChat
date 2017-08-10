@@ -9,7 +9,8 @@ const mapStateToProps = (state, { match }) => {
   return({
     user: state.auth.currentUser,
     messageId: match.params.messageId,
-    firstChannel: selectChannels(state, false)[0]
+    firstChannel: selectChannels(state, false)[0],
+    path: match.path
   });
 };
 
