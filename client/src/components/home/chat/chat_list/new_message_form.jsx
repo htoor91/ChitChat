@@ -26,6 +26,7 @@ class NewMessageForm extends React.Component {
     this.toggleGiphySearch = this.toggleGiphySearch.bind(this);
     this.addGiphy = this.addGiphy.bind(this);
     this.translateGif = this.translateGif.bind(this);
+    this.setGiphyAutocomplete = this.setGiphyAutocomplete.bind(this);
   }
 
   createMessage(custom=null){
@@ -97,13 +98,20 @@ class NewMessageForm extends React.Component {
   addGiphy(giphy) {
     this.clearState();
     this.setState({ content: `giphy:${giphy}` });
-    $("#message-content-input").focus();
+    $(".message-content-input").focus();
+  }
+
+  setGiphyAutocomplete(){
+    this.clearState();
+    this.setState({ content: '/giphy '});
+    $(".message-content-input").focus();
   }
 
   render(){
     let emoticonList;
     let giphySearch;
     let placeholder;
+    let giphyAutocomplete;
     if(this.state.emoticonListOpen){
       emoticonList = <EmoticonList
         addEmoticon={this.addEmoticon}
@@ -130,11 +138,21 @@ class NewMessageForm extends React.Component {
       placeholder = "Message #" + this.props.channel.name;
     }
 
+    if(this.state.content && '/giphy'.indexOf(this.state.content) === 0){
+      giphyAutocomplete = (
+        <div id="giphy-autocomplete" onClick={this.setGiphyAutocomplete}>
+          <p><span>/giphy</span> [text]</p>
+          <p>Post a random gif to channel</p>
+        </div>
+    );
+    }
+
     return (
       <div id="new-message-input">
         <div id="new-message-giphy" onClick={this.toggleGiphySearch}>
           <i className="fa fa-plus" aria-hidden="true"></i>
         </div>
+        {giphyAutocomplete}
         <input
           className="message-content-input"
           onChange={this.updateContent}
