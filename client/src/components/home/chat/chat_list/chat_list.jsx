@@ -112,7 +112,6 @@ class ChatList extends React.Component {
             fetchGifs={this.props.fetchGifs}
             giphys={this.props.giphys}/>
         </footer>
-        {this.scrollToBottom()}
       </section>
     );
   }
