@@ -1,7 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 
-const devPlugins = []; 
+const devPlugins = [];
 let plugins = [];
 
 const prodPlugins = [
