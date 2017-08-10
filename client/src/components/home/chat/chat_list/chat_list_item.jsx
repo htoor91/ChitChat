@@ -195,13 +195,22 @@ class ChatListItem extends React.Component {
     }
 
     if(this.props.message.content.startsWith("giphy")) {
-      const endOfImageUrl = this.props.message.content.indexOf("gif") + 3;
-      const messageGif = this.props.message.content.slice(6, endOfImageUrl);
+      let caption;
+      let messageArr = this.props.message.content.split(' ');
+      if(messageArr.length > 1){
+        caption = messageArr.slice(1).join(' ');
+      }
+
+      const endOfImageUrl = messageArr[0].indexOf("gif") + 3;
+      const messageGif = messageArr[0].slice(6, endOfImageUrl);
       messageContent = (
         <div>
           <div id="gif-container">
-            <div id="left-gif-bar"></div>
-            <img id="gif-message" src={messageGif}/>
+            <p id="gif-caption">{caption}</p>
+            <div id="bar-message-container">
+              <div id="left-gif-bar"></div>
+              <img id="gif-message" src={messageGif}/>
+            </div>
           </div>
         </div>
       );
