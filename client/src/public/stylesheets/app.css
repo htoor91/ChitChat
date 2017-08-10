@@ -1020,7 +1020,7 @@ body {
 .splash-container {
 	background-blend-mode: multiply;
 	background-color: #555;
-	background-image: url('../img/splash-image-compressed.jpg');
+	background-image: url('https://res.cloudinary.com/htoor91/image/upload/v1502303403/splash-image-compressed_rguwkg.jpg');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
