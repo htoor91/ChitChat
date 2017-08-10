@@ -12,25 +12,43 @@ class ChatList extends React.Component {
     const self = this;
 
     this.props.socket.on('receive message', (payload) => {
-      self.props.addMessage(payload.message.message);
+      if(self.props.channel){
+        self.props.addMessage(payload.message.message);
+      }
     });
 
     this.props.socket.on('receive notification', (channelId) => {
-      if(self.props.channelId !== channelId){
+      if(self.props.channel && self.props.channelId !== channelId){
         self.props.addNotification(channelId);
       }
     });
 
     this.props.socket.on('receive emoticon', (payload) => {
-      self.props.addEmoticon(payload.message.updatedMessage);
+      if(self.props.channel){
+        self.props.addEmoticon(payload.message.updatedMessage);
+      }
     });
 
     this.props.socket.on('receive updated message', (payload) => {
-      self.props.editMessage(payload.message.updatedMessage);
+      if(self.props.channel){
+        self.props.editMessage(payload.message.updatedMessage);
+      }
     });
 
     this.props.socket.on('receive deleted message', (payload) => {
-      self.props.removeMessage(payload.message.removedMessage);
+      if(self.props.channel){
+        self.props.removeMessage(payload.message.removedMessage);
+      }
+    });
+
+    this.props.socket.on('receive channel', (payload) => {
+      if(self.props.channel && payload.userIds.includes(self.props.currentUser._id)){
+        self.props.addChannel(payload.channel.channel);
+      }
+    });
+
+    this.props.socket.on('receive new signup', (payload) => {
+      self.props.addUserToChannel(self.props.channelId, payload.user);
     });
 
     this.scrollToBottom = this.scrollToBottom.bind(this);
