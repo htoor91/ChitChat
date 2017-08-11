@@ -67,7 +67,7 @@ class ChannelList extends React.Component {
     );
 
     return (
-      <div id="channel-list-container">
+      <div className="channel-list-container">
         <h2 id="public-channels-header">Channels
           <span> ({publicListItems.length})</span>
           <i onClick={this.openChannelModal}
