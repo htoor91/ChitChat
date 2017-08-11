@@ -4,3 +4,9 @@ export const selectChannels = (state, bool) => {
   .map(key => state.channels.channels[key])
   .filter(channel => channel.private === bool);
 };
+
+export const selectMessages = (state) => {
+  return Object
+  .keys(state.messages.messages)
+  .map(key => state.messages.messages[key]);
+};

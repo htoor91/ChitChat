@@ -17,11 +17,12 @@ import {
   removeMessage,
   createEmoticon,
   addEmoticon } from '../../../../actions/message_actions';
+import { selectMessages } from '../../../../reducers/selectors'
 import { fetchGifs, translateToGif } from '../../../../actions/giphy_actions';
 
 const mapStateToProps = (state, {match}) => {
   return {
-    messages: Object.keys(state.messages.messages).map(key => state.messages.messages[key]),
+    messages: selectMessages(state),
     channel: state.channels.channels[match.params.channelId],
     currentUser: state.auth.currentUser,
     channelId: match.params.channelId,
