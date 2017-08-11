@@ -9,15 +9,28 @@ const logger = require('./logger');
 logger.log('Seeding the Database');
 
 const users = [
-  {username: 'testuser1', password: 'testpass'},
-  {username: 'testuser2', password: 'testpass'},
-  {username: 'testuser3', password: 'testpass'}
+  {username: 'queen_cersei', password: 'testpass', aviUrl:"https://res.cloudinary.com/htoor91/image/upload/v1502488126/rsz_cersei_avi_e5bdgj.png"},
+  {username: 'khaleesi', password: 'testpass', aviUrl:"https://res.cloudinary.com/htoor91/image/upload/v1502488126/rsz_dany_avi_kpx7xn.png"},
+  {username: 'hound', password: 'testpass', aviUrl:"https://res.cloudinary.com/htoor91/image/upload/v1502488126/rsz_hound_avi_nwv7ld.png"},
+  {username: 'jaime', password: 'testpass', aviUrl:"https://res.cloudinary.com/htoor91/image/upload/v1502488126/rsz_jaime_avi_pazpyr.png"},
+  {username: 'jon', password: 'testpass', aviUrl:"https://res.cloudinary.com/htoor91/image/upload/v1502488126/rsz_jonsnow_avi_aaokhj.png"},
+  {username: 'no_one', password: 'testpass', aviUrl:"https://res.cloudinary.com/htoor91/image/upload/v1502488126/rsz_no_one_avi_n7lza9.png"},
+  {username: 'reek', password: 'testpass', aviUrl:"https://res.cloudinary.com/htoor91/image/upload/v1502488126/rsz_reek_avi_cmmbik.png"},
+  {username: 'tyrion', password: 'testpass', aviUrl:"https://res.cloudinary.com/htoor91/image/upload/v1502488368/rsz_tyrion_avi_innrcj.png"},
+  {username: 'drogon', password: 'testpass', aviUrl:"https://res.cloudinary.com/htoor91/image/upload/v1502488126/rsz_drogon_avi_mhbf0w.png"}
 ];
 
 const channels = [
   {name: 'general'},
-  {name: 'testchannel1'},
-  {name: 'testchannel2'}
+  {name: 'war room'}
+];
+
+const users1 = [
+  {username: 'king_kendrick', password: 'testpass', aviUrl:""},
+  {username: 'jcole', password: 'testpass', aviUrl:""},
+  {username: 'eminem', password: 'testpass', aviUrl:""},
+  {username: 'yeezy', password: 'testpass', aviUrl:""},
+  {username: 'drake6', password: 'testpass', aviUrl:""}
 ];
 
 const createDoc = function(model, doc) {
