@@ -6,7 +6,7 @@ module.exports = {
   context: __dirname,
   entry: './client/src/chitchat.jsx',
   output: {
-    path: path.join(__dirname, 'js'),
+    path: "./client/src/public/js",
     filename: "bundle.js"
   },
   plugins:[
