@@ -22,7 +22,6 @@ const users = [
 
 const channels = [
   {name: 'general'},
-  {name: 'war room'}
 ];
 
 const users1 = [
