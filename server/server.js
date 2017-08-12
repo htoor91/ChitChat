@@ -14,6 +14,7 @@ if (config.seed) {
   require('./util/seed');
 }
 
+
 app.use(express.static(path.join(__dirname, '..', 'client', 'src', 'public')));
 
 require('./middleware/app_middleware')(app);
