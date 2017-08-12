@@ -22,6 +22,7 @@ class NewMessageForm extends React.Component {
     this.updateContent = this.updateContent.bind(this);
     this.clearState = this.clearState.bind(this);
     this.toggleEmoticonDisplay = this.toggleEmoticonDisplay.bind(this);
+    this.openEmoticonDisplay = this.openEmoticonDisplay.bind(this);
     this.addEmoticon = this.addEmoticon.bind(this);
     this.toggleGiphySearch = this.toggleGiphySearch.bind(this);
     this.addGiphy = this.addGiphy.bind(this);
@@ -82,13 +83,28 @@ class NewMessageForm extends React.Component {
     this.setState({ emoticonListOpen: !this.state.emoticonListOpen });
   }
 
+  openEmoticonDisplay(e){
+    if(e.target.src === "https://twemoji.maxcdn.com/svg/1f603.svg" ||
+    e.target.src === "https://twemoji.maxcdn.com/svg/1f331.svg" ||
+    e.target.src === "https://twemoji.maxcdn.com/svg/1f52d.svg" ||
+    e.target.src === "https://twemoji.maxcdn.com/svg/1f6b2.svg" ||
+    e.target.src === "https://twemoji.maxcdn.com/svg/1f522.svg" ||
+    e.target.classList.value === "fa fa-smile-o" ||
+    e.target.id === "emoticon-toggle"){
+      this.setState({emoticonListOpen: true});
+    } else {
+      this.setState({ emoticonListOpen: false});
+    }
+
+  }
+
   addEmoticon(emoticon){
     if(this.state.content){
       this.setState({content: this.state.content + " " + emoticon});
     } else {
       this.setState({content: emoticon});
     }
-    $("#message-content-input").focus();
+    $(".message-content-input").focus();
   }
 
   toggleGiphySearch() {
@@ -162,7 +178,7 @@ class NewMessageForm extends React.Component {
           onKeyPress={this.handleKeyPress}
           placeholder={placeholder}
           autoComplete="off"/>
-        <div id="emoticon-toggle" onClick={this.toggleEmoticonDisplay}>
+        <div id="emoticon-toggle" onClick={this.openEmoticonDisplay}>
           {emoticonList}
           <i className="fa fa-smile-o"
             aria-hidden="true"></i>
