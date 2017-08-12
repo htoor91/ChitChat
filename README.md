@@ -45,25 +45,25 @@ ChitChat is a full-stack web application inspired by Slack.  It utilizes a Node.
   When we create a message, we use the .then() method from our API call's returned Promise to make sure that we only perform our socket broadcast upon a successful call to the server. In our success callback, we then emit an event that our socket on the server-side will be listening for, and pass it an object with the appropriate data (our message, and the channel our message is in).
   ```javascript
 this.props.createMessage(msg).then((createdMsg) => {
-  this.props.scrollToBottom();
-  this.props.socket.emit('broadcast message',
-  { message: createdMsg, channel: this.state.channelId });
+    this.props.scrollToBottom();
+    this.props.socket.emit('broadcast message',
+    { message: createdMsg, channel: this.state.channelId });
 });
   ```
 
   The server listens for this event, and uses the incoming data to broadcast the message to all other connected users to the specific 'room' (or channel) that the message was created in. Notifications are also broadcasted to every connected user.
   ```javascript
 socket.on('broadcast message', function(data){
-  socket.broadcast.to(data.channel).emit('receive message', data);
-  socket.broadcast.emit('receive notification', data.channel);
+    socket.broadcast.to(data.channel).emit('receive message', data);
+    socket.broadcast.emit('receive notification', data.channel);
 });
   ```
 
   Finally in our ChatList view component, we listen for the socket event emitted from our server, and use the appropriate data (the created message), and dispatch an action (addMessage in this case) in order to update our state.  
   ```javascript
 this.props.socket.on('receive message', (payload) => {
-  self.props.addMessage(payload.message.message);
-  this.scrollToBottom();
+    self.props.addMessage(payload.message.message);
+    this.scrollToBottom();
 });
   ```
 
@@ -84,13 +84,13 @@ this.props.socket.on('receive message', (payload) => {
   In order to translate our Gif, we first make use of our API utility function Giphy.translateToGif() that makes a 3rd party API call to Giphy using a search term and returns the appropriate JSON. We return a native Promise in order to use .then() in a later function.
   ```javascript
 translateGif(){
-  const searchTerm = this.state.content.split(' ').slice(1).join(' ');
+    const searchTerm = this.state.content.split(' ').slice(1).join(' ');
 
-  return new Promise((resolve, reject) => {
-    Giphy.translateToGif(searchTerm).then((giphy) => {
-      return resolve('giphy:' + giphy.data.images.fixed_height.url + ' ' + searchTerm);
+    return new Promise((resolve, reject) => {
+        Giphy.translateToGif(searchTerm).then((giphy) => {
+          return resolve('giphy:' + giphy.data.images.fixed_height.url + ' ' + searchTerm);
+        });
     });
-  });
 }
   ```
 
@@ -99,9 +99,9 @@ translateGif(){
 // handleKeyPress function
 
 if(this.state.content.startsWith('/giphy ')){
-  this.translateGif().then((custom) => {
-    this.createMessage(custom);
-  });
+    this.translateGif().then((custom) => {
+      this.createMessage(custom);
+    });
 }
   ```
 
