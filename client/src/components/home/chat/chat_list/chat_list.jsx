@@ -14,6 +14,7 @@ class ChatList extends React.Component {
     this.props.socket.on('receive message', (payload) => {
       if(self.props.channel){
         self.props.addMessage(payload.message.message);
+        this.scrollToBottom();
       }
     });
 
