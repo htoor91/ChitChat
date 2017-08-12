@@ -17,7 +17,7 @@ import {
   removeMessage,
   createEmoticon,
   addEmoticon } from '../../../../actions/message_actions';
-import { selectMessages } from '../../../../reducers/selectors'
+import { selectMessages } from '../../../../reducers/selectors';
 import { fetchGifs, translateToGif } from '../../../../actions/giphy_actions';
 
 const mapStateToProps = (state, {match}) => {
