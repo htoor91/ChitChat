@@ -71,7 +71,7 @@ this.props.socket.on('receive message', (payload) => {
 
 ![gif of chat](/docs/production_images/giphy.gif)
 
-### Emojis messages and reactions
+### Emoji messages and reactions
 
   A fun way to express your feelings nowadays is through the use of emojis, and ChitChat allows you to do just this through the use of react-emoji and react-emoji-picker.  You can use emojis in your chat messages or even have reactions to other users' messages if you happen to find them funny, sad, rage-inducing, etc.
 
