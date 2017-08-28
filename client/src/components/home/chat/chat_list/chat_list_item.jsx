@@ -107,7 +107,7 @@ class ChatListItem extends React.Component {
       this.props.deleteMessage(this.props.message._id).then((deletedMessage) => {
         this.props.socket.emit('broadcast deleted message', {
           message: deletedMessage, channel: this.props.channelId
-        });``
+        });
       });
     }
   }
